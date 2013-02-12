@@ -1,0 +1,6 @@
+MIDlet-Name: Robot2013
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: FIRST
+MIDlet-1: Robot2013, , com._604robotics.robot2013.Robot2013
+MicroEdition-Profile: IMP-1.0
+MicroEdition-Configuration: CLDC-1.1
