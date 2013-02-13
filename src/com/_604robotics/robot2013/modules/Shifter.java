@@ -17,6 +17,12 @@ public class Shifter extends Module {
                     solenoid.set(false);
                 }
             });
+            
+            add("High Power", new Action() {
+                public void begin (ActionData data) {
+                    solenoid.set(true);
+                }
+            });
         }});
     }
 }
