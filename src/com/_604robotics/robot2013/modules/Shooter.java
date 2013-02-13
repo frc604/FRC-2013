@@ -23,6 +23,6 @@ public class Shooter extends Module {
         victor.set(speed);
     }
     public void off(){
-        victor.set(speed);
+        victor.set(0);
     }
 }
