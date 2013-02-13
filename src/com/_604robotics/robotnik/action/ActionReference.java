@@ -4,6 +4,8 @@ import com._604robotics.robotnik.action.field.ActionData;
 import com._604robotics.robotnik.action.field.Field;
 import com._604robotics.robotnik.module.ModuleReference;
 import com._604robotics.robotnik.networking.IndexedTable;
+import com._604robotics.robotnik.prefabs.trigger.TriggerManual;
+import com._604robotics.robotnik.trigger.TriggerAccess;
 import java.util.Enumeration;
 
 public class ActionReference {
@@ -14,6 +16,8 @@ public class ActionReference {
     
     private final IndexedTable dataTable;
     private final ActionData actionData;
+    
+    private final TriggerManual activeTrigger = new TriggerManual(false);
     
     public ActionReference (ModuleReference module, Action action, IndexedTable table, String name) {
         this.action = action;
@@ -61,6 +65,7 @@ public class ActionReference {
     
     public void begin () {
         this.action.begin(this.actionData);
+        this.activeTrigger.set(true);
     }
     
     public void run () {
@@ -69,5 +74,10 @@ public class ActionReference {
     
     public void end () {
         this.action.end(this.actionData);
+        this.activeTrigger.set(false);
+    }
+    
+    public TriggerAccess getActiveTrigger () {
+        return (TriggerAccess) this.activeTrigger;
     }
 }
