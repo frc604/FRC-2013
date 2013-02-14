@@ -2,13 +2,15 @@ package com._604robotics.robotnik.action;
 
 import com._604robotics.robotnik.action.field.ActionData;
 import com._604robotics.robotnik.action.field.Field;
+import com._604robotics.robotnik.data.DataRecipient;
 import com._604robotics.robotnik.module.ModuleReference;
 import com._604robotics.robotnik.networking.IndexedTable;
 import com._604robotics.robotnik.prefabs.trigger.TriggerManual;
 import com._604robotics.robotnik.trigger.TriggerAccess;
+import com._604robotics.robotnik.trigger.TriggerRecipient;
 import java.util.Enumeration;
 
-public class ActionReference {
+public class ActionReference implements DataRecipient, TriggerRecipient {
     private final Action action;
     
     private final IndexedTable triggerTable;

@@ -1,23 +1,23 @@
 package com._604robotics.robotnik.coordinator.connectors;
 
-import com._604robotics.robotnik.action.ActionReference;
 import com._604robotics.robotnik.data.DataAccess;
+import com._604robotics.robotnik.data.DataRecipient;
 
 public class DataWire {
-    private final ActionReference action;
+    private final DataRecipient recipient;
     
     private final String fieldName;
     private final DataAccess data;
     
-    public DataWire (ActionReference action, String fieldName, DataAccess data) {
-        this.action = action;
+    public DataWire (DataRecipient recipient, String fieldName, DataAccess data) {
+        this.recipient = recipient;
         
         this.fieldName = fieldName;
         this.data = data;
     }
 
-    public ActionReference getAction () {
-        return this.action;
+    public DataRecipient getRecipient () {
+        return this.recipient;
     }
 
     public DataAccess getData () {

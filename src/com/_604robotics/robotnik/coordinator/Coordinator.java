@@ -27,7 +27,7 @@ public abstract class Coordinator {
         while (wires.hasMoreElements()) {
             wire = (DataWire) wires.nextElement();
             
-            wire.getAction().sendData(wire.getFieldName(), wire.getData().get());
+            wire.getRecipient().sendData(wire.getFieldName(), wire.getData().get());
         }
         
         final Enumeration bindings = this.triggerBindings.elements();
@@ -37,7 +37,7 @@ public abstract class Coordinator {
             binding = (Binding) bindings.nextElement();
             
             if (binding.getTrigger().get()) {
-                binding.getAction().sendTrigger(binding.isSafety() ? 2D : 1D);
+                binding.getRecipient().sendTrigger(binding.isSafety() ? 2D : 1D);
             }
         }
     }

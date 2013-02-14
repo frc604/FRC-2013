@@ -2,29 +2,30 @@ package com._604robotics.robotnik.coordinator.connectors;
 
 import com._604robotics.robotnik.action.ActionReference;
 import com._604robotics.robotnik.trigger.TriggerAccess;
+import com._604robotics.robotnik.trigger.TriggerRecipient;
 
 public class Binding {
-    private final ActionReference action;
+    private final TriggerRecipient recipient;
     private final TriggerAccess trigger;
     
     private final boolean safety;
     
-    public Binding (ActionReference action, TriggerAccess trigger) {
-        this.action = action;
+    public Binding (TriggerRecipient recipient, TriggerAccess trigger) {
+        this.recipient = recipient;
         this.trigger = trigger;
         
         this.safety = false;
     }
     
     public Binding (ActionReference action, TriggerAccess trigger, boolean safety) {
-        this.action = action;
+        this.recipient = action;
         this.trigger = trigger;
         
         this.safety = safety;
     }
 
-    public ActionReference getAction () {
-        return this.action;
+    public TriggerRecipient getRecipient () {
+        return this.recipient;
     }
 
     public TriggerAccess getTrigger () {

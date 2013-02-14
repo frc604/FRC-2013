@@ -1,4 +1,4 @@
-package com._604robotics.robotnik.data.convenience;
+package com._604robotics.robotnik.data.sources;
 
 import com._604robotics.robotnik.data.Data;
 import com.sun.squawk.util.StringTokenizer;
@@ -15,7 +15,7 @@ public class NetworkData implements Data {
         this.key = key;
         this.defaultValue = defaultValue;
 
-        final StringTokenizer tokens = new StringTokenizer(key, ".");
+        final StringTokenizer tokens = new StringTokenizer(namespace, ".");
         
         ITable workingTable = NetworkTable.getTable(tokens.nextToken());
         
