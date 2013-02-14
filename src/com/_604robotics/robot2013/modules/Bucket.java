@@ -34,6 +34,7 @@ public class Bucket extends Module {
                 }
                 public void end (ActionData data) {
                     timer.stop();
+                    timer.reset();
                     solenoid.set(false);
                 }
             });
