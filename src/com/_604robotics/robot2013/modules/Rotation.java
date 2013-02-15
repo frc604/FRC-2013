@@ -5,6 +5,9 @@ import com._604robotics.robotnik.action.controllers.ElasticController;
 import com._604robotics.robotnik.action.field.ActionData;
 import com._604robotics.robotnik.action.field.FieldMap;
 import com._604robotics.robotnik.module.Module;
+import edu.wpi.first.wpilibj.AnalogChannel;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.Victor;
 
 public class Rotation extends Module {
