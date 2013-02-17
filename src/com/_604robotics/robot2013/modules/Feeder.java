@@ -7,8 +7,7 @@ import com._604robotics.robotnik.module.Module;
 import edu.wpi.first.wpilibj.Victor;
 
 public class Feeder extends Module {
-    // FIXME: Ports are un-wired; subject to change.
-    private final Victor victor = new Victor(4);
+    private final Victor victor = new Victor(6);
     
     public Feeder () {
         this.set(new ElasticController() {{

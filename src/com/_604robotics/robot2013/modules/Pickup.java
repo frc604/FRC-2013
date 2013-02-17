@@ -7,7 +7,6 @@ import com._604robotics.robotnik.module.Module;
 import edu.wpi.first.wpilibj.Victor;
 
 public class Pickup extends Module {
-    // FIXME: Ports are un-wired; subject to change.
     private final Victor victor = new Victor(5);
     
     public Pickup () {
