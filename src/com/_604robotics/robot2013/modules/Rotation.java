@@ -19,7 +19,7 @@ public class Rotation extends Module {
     private final Victor victor = new Victor(3);
     private final AS5145B encoder = new AS5145B(1);
     
-    private final PIDController pid = new PIDController(-0.03, 0.0, -0.05, encoder, victor, 0.01);
+    private final PIDController pid = new PIDController(-0.03, -0.001, -0.05, encoder, victor, 0.01);
     
     private boolean aimed = false;
     private boolean ready = false;
@@ -66,7 +66,7 @@ public class Rotation extends Module {
                         define("power", 0D);
                     }}) {
                         public void run (ActionData data) {
-                            victor.set(data.get("power") * 0.5);
+                            victor.set(data.get("power") * -0.5);
                         }
                         
                         public void end (ActionData data) {
@@ -112,7 +112,7 @@ public class Rotation extends Module {
                 }
                 
                 public void run (ActionData data) {
-                     victor.set(data.get("power") * 0.5);
+                     victor.set(data.get("power") * -0.5);
                 }
                 
                 public void end (ActionData data) {
@@ -132,7 +132,7 @@ public class Rotation extends Module {
                     aimed = false;
                     ready = false;
                     
-                    pid.setPID(-.025, 0, -0.075);
+//                    pid.setPID(-.03, 0, -0.075);
                     pid.setSetpoint(data.get("angle"));
                     pid.enable();
                     

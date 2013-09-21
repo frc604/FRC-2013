@@ -9,11 +9,13 @@ import com._604robotics.robotnik.module.Module;
 import com._604robotics.robotnik.trigger.Trigger;
 import com._604robotics.robotnik.trigger.TriggerMap;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 
 public class Shooter extends Module {
     private final Victor victor = new Victor(4);
     private final Encoder encoder = new Encoder(4, 5);
+    private final Timer timer = new Timer();
     
     public Shooter(){
         encoder.setDistancePerPulse(1);
@@ -30,7 +32,7 @@ public class Shooter extends Module {
         this.set(new TriggerMap() {{
             add("Charged", new Trigger() {
                 public boolean run () {
-                    return encoder.getRate() > 20000;
+                    return timer.get() > 2; //encoder.getRate() > 20000;
                 }
             });
         }});
@@ -44,10 +46,13 @@ public class Shooter extends Module {
             
             add("On", new Action() {
                 public void begin (ActionData data) {
+                    timer.start();
                     victor.set(1D);
                 }
                 
                 public void end (ActionData data) {
+                    timer.stop();
+                    timer.reset();
                     victor.set(0D);
                 }
             });

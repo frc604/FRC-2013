@@ -42,7 +42,7 @@ public class Bucket extends Module {
                             this.chargeTimer.reset();
                         }
                     } else {
-                        if (chargeTimer.get() > 0.25) {
+                        if (chargeTimer.get() > 1.0) {
                             out = false;
                             this.chargeTimer.reset();
                         }
