@@ -28,7 +28,7 @@ public class Rotation extends Module {
         this.encoder.setZero(250D);
         
         this.pid.setOutputRange(-0.5D, 0.5D);
-        this.pid.setAbsoluteTolerance(0.5D);
+        this.pid.setAbsoluteTolerance(0.25D);
         
         SmartDashboard.putData("Rotation PID", this.pid);
         
@@ -93,6 +93,7 @@ public class Rotation extends Module {
             
             add("Load", new Action() {
                 public void begin (ActionData data) {
+                    pid.setPID(-.025, 0, -.020);
                     pid.setSetpoint(-10D);
                     pid.enable();
                 }
@@ -131,6 +132,7 @@ public class Rotation extends Module {
                     aimed = false;
                     ready = false;
                     
+                    pid.setPID(-.025, 0, -0.075);
                     pid.setSetpoint(data.get("angle"));
                     pid.enable();
                     
