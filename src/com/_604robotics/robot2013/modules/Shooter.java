@@ -14,25 +14,13 @@ import edu.wpi.first.wpilibj.Victor;
 
 public class Shooter extends Module {
     private final Victor victor = new Victor(4);
-    private final Encoder encoder = new Encoder(4, 5);
     private final Timer timer = new Timer();
     
     public Shooter(){
-        encoder.setDistancePerPulse(1);
-        encoder.start();
-        
-        this.set(new DataMap() {{
-            add("Speed", new Data() {
-                public double run () {
-                    return encoder.getRate();
-                };
-            });
-        }});
-        
         this.set(new TriggerMap() {{
             add("Charged", new Trigger() {
                 public boolean run () {
-                    return timer.get() > 2; //encoder.getRate() > 20000;
+                    return timer.get() > 2;
                 }
             });
         }});
@@ -51,9 +39,10 @@ public class Shooter extends Module {
                 }
                 
                 public void end (ActionData data) {
+                    victor.set(0D);
+
                     timer.stop();
                     timer.reset();
-                    victor.set(0D);
                 }
             });
         }});
