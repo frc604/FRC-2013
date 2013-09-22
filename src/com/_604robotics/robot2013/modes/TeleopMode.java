@@ -60,10 +60,7 @@ public class TeleopMode extends Coordinator {
                 /* Manual */
                 {
                     this.bind(new Binding(modules.getModule("Feeder").getAction("Out"), manipController.buttons.LT));
-                    this.bind(new Binding(modules.getModule("Pickup").getAction("Out"), manipController.buttons.LT));
-                    
                     this.bind(new Binding(modules.getModule("Feeder").getAction("In"), manipController.buttons.RT));
-                    this.bind(new Binding(modules.getModule("Pickup").getAction("In"), manipController.buttons.RT));
                 }
                 
                 /* Station */

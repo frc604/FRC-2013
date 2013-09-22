@@ -31,7 +31,6 @@ public class Robot2013 extends Robot {
             add("Shifter", new Shifter());
             add("Shooter", new Shooter());
             add("Feeder", new Feeder());
-            add("Pickup", new Pickup());
             add("Bucket", new Bucket());
             add("Pneumatic Hanger", new PneumaticHanger());
         }});
