@@ -10,9 +10,9 @@ public class DashboardSystem extends Coordinator {
         this.fill(new DataWire(DashboardOutput.asDouble(), "currentAngle", modules.getModule("Rotation").getData("Angle"))); 
         
         this.fill(new DataWire(DashboardOutput.asBoolean(), "rotationAimed", modules.getModule("Rotation").getTrigger("Aimed"))); 
+        this.fill(new DataWire(DashboardOutput.asBoolean(), "rotationReady", modules.getModule("Rotation").getTrigger("Ready"))); 
+
         this.fill(new DataWire(DashboardOutput.asBoolean(), "shooterCharged", modules.getModule("Shooter").getTrigger("Charged"))); 
-        
         this.fill(new DataWire(DashboardOutput.asBoolean(), "bucketDeployed", modules.getModule("Bucket").getTrigger("Deployed"))); 
-        this.fill(new DataWire(DashboardOutput.asBoolean(), "bucketRecharging", modules.getModule("Bucket").getTrigger("Recharging")));
     }
 }

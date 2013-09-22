@@ -47,7 +47,6 @@ public class TeleopMode extends Coordinator {
                 /* Manual */
                 {
                     this.fill(new DataWire(modules.getModule("Rotation").getAction("Manual"), "power", manipController.leftStick.Y));
-                    this.fill(new DataWire(modules.getModule("Rotation").getAction("Aim (Manual)"), "power", manipController.leftStick.Y));
                 }
                 
                 /* Stow */
@@ -78,7 +77,6 @@ public class TeleopMode extends Coordinator {
             {
                 /* Manual */
                 {
-                    this.bind(new Binding(modules.getModule("Rotation").getAction("Aim (Manual)"), manipController.buttons.LB));
                     this.bind(new Binding(modules.getModule("Shooter").getAction("On"), manipController.buttons.LB));
                 }
                 
@@ -91,8 +89,8 @@ public class TeleopMode extends Coordinator {
                     this.bind(new Binding(angles.generate(modules.getModule("Targets").getData("Bottom Angle")), manipController.buttons.A));
                     this.bind(new Binding(angles.generate(modules.getModule("Dashboard").getData("Manual Aim Angle")), manipController.buttons.Back));
                     
-                    this.bind(new Binding(modules.getModule("Rotation").getAction("Aim (Angle)"), angles.getTrigger()));
-                    this.fill(new DataWire(modules.getModule("Rotation").getAction("Aim (Angle)"), "angle", angles));
+                    this.bind(new Binding(modules.getModule("Rotation").getAction("Angle"), angles.getTrigger()));
+                    this.fill(new DataWire(modules.getModule("Rotation").getAction("Angle"), "angle", angles));
                     
                     this.bind(new Binding(modules.getModule("Shooter").getAction("On"), angles.getTrigger()));
                 }

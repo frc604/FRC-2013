@@ -8,18 +8,13 @@ import com._604robotics.robotnik.trigger.TriggerAccess;
 
 public class ShootingSystem extends Coordinator {
     public void apply (ModuleManager modules) {
-        // Trigger the bucket piston when shooting
-        this.bind(new Binding(modules.getModule("Bucket").getAction("On"), new TriggerAnd(
-                new TriggerAccess[] {
-                    modules.getModule("Shooter").getTrigger("Charged"),
-                    modules.getModule("Rotation").getTrigger("Aimed"),
-                    modules.getModule("Rotation").getTrigger("Ready")
-                })));
-        
-        // Force the shooter off when rotation isn't ready
-        this.bind(new Binding(modules.getModule("Shooter").getAction("Off"), modules.getModule("Rotation").getTrigger("Ready").not(), true));
-        
         // Force the compressor off when shooting
         this.bind(new Binding(modules.getModule("Regulator").getAction("Off"), modules.getModule("Shooter").getAction("On").getActiveTrigger(), true));
+
+        // Force the shooter off until rotation is ready
+        this.bind(new Binding(modules.getModule("Shooter").getAction("Off"), modules.getModule("Rotation").getTrigger("Ready").not(), true));
+        
+        // Trigger the bucket piston when the shooter's charged
+        this.bind(new Binding(modules.getModule("Bucket").getAction("On"), modules.getModule("Shooter").getTrigger("Charged")));
     }
 }
