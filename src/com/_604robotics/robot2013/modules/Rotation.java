@@ -13,8 +13,11 @@ import com._604robotics.robotnik.utils.AS5145B;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Rotation extends Module {
+    private final double NEUTRAL = -20D;
+    
     private final Victor victor = new Victor(3);
     private final AS5145B encoder = new AS5145B(1);
     
@@ -27,6 +30,8 @@ public class Rotation extends Module {
         
         this.pid.setOutputRange(-0.5D, 0.5D);
         this.pid.setAbsoluteTolerance(0.25D);
+        
+        SmartDashboard.putData("Rotation PID", pid);
         
         this.set(new DataMap() {{
             add("Angle", new Data() {
@@ -111,8 +116,8 @@ public class Rotation extends Module {
                     ready = false;
                     aligned = false;
                     
-                    pid.setPID(-0.030, -0.001, -0.050);
-                    pid.setSetpoint(0D);
+                    pid.setPID(-0.030, 0D, -0.050);
+                    pid.setSetpoint(NEUTRAL);
                     pid.enable();
                 }
 
@@ -121,7 +126,9 @@ public class Rotation extends Module {
                         if (pid.onTarget()) {
                             aligned = true;
                             
+                            pid.reset();
                             pid.setSetpoint(data.get("angle"));
+                            pid.enable();
 
                             timer.start();
                         }
@@ -133,14 +140,14 @@ public class Rotation extends Module {
                             aligned = false;
                             
                             pid.reset();
-                            pid.setSetpoint(0D);
+                            pid.setSetpoint(NEUTRAL);
                             pid.enable();
                             
                             timer.stop();
                             timer.reset();
                         }
-
-                        ready = timer.get() > 1.5;
+                        
+                        ready = timer.get() > 3D;
                     }
                 }
 
