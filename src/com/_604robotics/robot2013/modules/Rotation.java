@@ -105,25 +105,43 @@ public class Rotation extends Module {
                 define("angle", 0D);
             }}) {
                 private final Timer timer = new Timer();
+                private boolean aligned = false;
                 
                 public void begin (ActionData data) {
                     ready = false;
+                    aligned = false;
                     
                     pid.setPID(-0.030, -0.001, -0.050);
-                    pid.setSetpoint(data.get("angle"));
+                    pid.setSetpoint(0D);
                     pid.enable();
-                    
-                    timer.start();
                 }
 
                 public void run (ActionData data) {
-                    final double angle = data.get("angle");
-                    
-                    if (angle != pid.getSetpoint()) {
-                        pid.setSetpoint(angle);
+                    if (!aligned) {
+                        if (pid.onTarget()) {
+                            aligned = true;
+                            
+                            pid.setSetpoint(data.get("angle"));
+
+                            timer.start();
+                        }
+                    } else {
+                        final double angle = data.get("angle");
+
+                        if (angle != pid.getSetpoint()) {
+                            ready = false;
+                            aligned = false;
+                            
+                            pid.reset();
+                            pid.setSetpoint(0D);
+                            pid.enable();
+                            
+                            timer.stop();
+                            timer.reset();
+                        }
+
+                        ready = timer.get() > 1.5;
                     }
-                    
-                    ready = timer.get() > 1.5;
                 }
 
                 public void end (ActionData data) {
@@ -133,6 +151,7 @@ public class Rotation extends Module {
                     timer.reset();
                     
                     ready = false;
+                    aligned = false;
                 }
             });
         }});
