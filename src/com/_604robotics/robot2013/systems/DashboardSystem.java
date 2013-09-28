@@ -14,5 +14,7 @@ public class DashboardSystem extends Coordinator {
 
         this.fill(new DataWire(DashboardOutput.asBoolean(), "shooterCharged", modules.getModule("Shooter").getTrigger("Charged"))); 
         this.fill(new DataWire(DashboardOutput.asBoolean(), "bucketDeployed", modules.getModule("Bucket").getTrigger("Deployed"))); 
+        
+        this.fill(new DataWire(DashboardOutput.asBoolean(), "compressorCharged", modules.getModule("Regulator").getTrigger("Charged")));
     }
 }
