@@ -13,7 +13,6 @@ import com._604robotics.robotnik.utils.AS5145B;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Rotation extends Module {
     private final Victor victor = new Victor(3);

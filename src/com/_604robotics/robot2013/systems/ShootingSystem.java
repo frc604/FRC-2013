@@ -3,8 +3,6 @@ package com._604robotics.robot2013.systems;
 import com._604robotics.robotnik.coordinator.Coordinator;
 import com._604robotics.robotnik.coordinator.connectors.Binding;
 import com._604robotics.robotnik.module.ModuleManager;
-import com._604robotics.robotnik.prefabs.trigger.TriggerAnd;
-import com._604robotics.robotnik.trigger.TriggerAccess;
 
 public class ShootingSystem extends Coordinator {
     public void apply (ModuleManager modules) {

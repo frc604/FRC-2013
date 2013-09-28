@@ -10,7 +10,6 @@ import com._604robotics.robot2013.modules.Shifter;
 import com._604robotics.robot2013.modules.Shooter;
 import com._604robotics.robot2013.modules.Feeder;
 import com._604robotics.robot2013.modules.PneumaticHanger;
-import com._604robotics.robot2013.modules.Pickup;
 import com._604robotics.robot2013.modules.Rotation;
 import com._604robotics.robot2013.modules.Targets;
 import com._604robotics.robot2013.systems.DashboardSystem;
