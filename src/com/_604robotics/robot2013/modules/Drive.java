@@ -24,7 +24,7 @@ public class Drive extends Module {
                 define("right", 0D);
             }}) {
                public void run (ActionData data) {
-                   drive.tankDrive(data.get("left"), data.get("right"));
+                   drive.tankDrive(data.get("right") * -1, data.get("left") * -1);
                }
                
                public void end (ActionData data) {
