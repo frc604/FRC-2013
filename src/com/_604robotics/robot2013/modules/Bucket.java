@@ -12,12 +12,19 @@ import edu.wpi.first.wpilibj.Timer;
 
 public class Bucket extends Module {
     private final DoubleSolenoid solenoid = new DoubleSolenoid(3, 4);
+    private int count = 1;
     
     public Bucket () {
         this.set(new TriggerMap() {{
             add("Deployed", new Trigger() {
                 public boolean run () {
                     return solenoid.get().equals(Value.kForward);
+                }
+            });
+            
+            add("Emptied", new Trigger() {
+                public boolean run () {
+                    return count > 4;
                 }
             });
         }});
@@ -33,12 +40,18 @@ public class Bucket extends Module {
                 private final Timer timer = new Timer();
 
                 public void begin (ActionData data) {
+                    count = 1;
+                    
                     timer.start();
                     solenoid.set(Value.kForward);
                 }
 
                 public void run (ActionData data) {
-                    if (timer.get() % 0.375 > 0.125) {
+                    if (count > 4 || timer.get() % 0.375 > 0.125) {
+                        if (solenoid.get() == Value.kForward) {
+                            count++;
+                        }
+
                         solenoid.set(Value.kReverse);
                     } else {
                         solenoid.set(Value.kForward);
