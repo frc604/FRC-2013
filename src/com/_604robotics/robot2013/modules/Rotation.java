@@ -90,13 +90,23 @@ public class Rotation extends Module {
                 }
             });
             
-            add("Load", new Action() {
+            add("Load", new Action(new FieldMap() {{
+                define("angle", -10D);
+            }}) {
                 public void begin (ActionData data) {
                     ready = true;
 
                     pid.setPID(-.025, 0, -.020);
-                    pid.setSetpoint(-10D);
+                    pid.setSetpoint(data.get("angle"));
                     pid.enable();
+                }
+                
+                public void run (ActionData data) {
+                    final double angle = data.get("angle");
+
+                    if (angle != pid.getSetpoint()) {
+                        pid.setSetpoint(data.get("angle"));
+                    }
                 }
                 
                 public void end (ActionData data) {
