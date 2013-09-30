@@ -9,7 +9,7 @@ public class Targets extends Module {
         this.set(new DataMap() {{
             add("Top Angle", new Data() {
                 public double run () {
-                    return -22D;
+                    return -21D;
                 }
             });
             
