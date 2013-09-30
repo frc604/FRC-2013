@@ -11,6 +11,8 @@ public class Dashboard extends Module {
             add("Feeder Station Angle", new DashboardData("Feeder Station Angle", -10D));
             
             add("Rotation Alignment Time", new DashboardData("Rotation Alignment Time", 3D));
+            
+            add("Shooter Charge Power", new DashboardData("Shooter Charge Power", 1D));
             add("Shooter Charge Time", new DashboardData("Shooter Charge Time", 2D));
         }});
     }

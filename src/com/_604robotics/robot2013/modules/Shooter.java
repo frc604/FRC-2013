@@ -32,7 +32,8 @@ public class Shooter extends Module {
             });
             
             add("On", new Action(new FieldMap() {{
-                define("chargeTime", 2D);
+                define("power", 1D);
+                define("time", 2D);
             }}) {
                 private final Timer timer = new Timer();
                 
@@ -40,11 +41,12 @@ public class Shooter extends Module {
                     charged = false;
                     timer.start();
                     
-                    victor.set(1D);
+                    victor.set(data.get("power"));
                 }
                 
                 public void run (ActionData data) {
-                    charged = timer.get() > data.get("chargeTime");
+                    victor.set(data.get("power"));
+                    charged = timer.get() > data.get("time");
                 }
                 
                 public void end (ActionData data) {
