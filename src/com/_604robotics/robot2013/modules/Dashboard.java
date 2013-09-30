@@ -9,6 +9,8 @@ public class Dashboard extends Module {
         this.set(new DataMap() {{
             add("Manual Aim Angle", new DashboardData("Manual Aim Angle", 0D));
             add("Feeder Station Angle", new DashboardData("Feeder Station Angle", -10D));
+            
+            add("Shooter Charge Time", new DashboardData("Shooter Charge Time", 2D));
         }});
     }
 }
