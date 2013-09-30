@@ -10,6 +10,7 @@ public class Dashboard extends Module {
             add("Manual Aim Angle", new DashboardData("Manual Aim Angle", 0D));
             add("Feeder Station Angle", new DashboardData("Feeder Station Angle", -10D));
             
+            add("Rotation Alignment Time", new DashboardData("Rotation Alignment Time", 3D));
             add("Shooter Charge Time", new DashboardData("Shooter Charge Time", 2D));
         }});
     }

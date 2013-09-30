@@ -118,13 +118,14 @@ public class Rotation extends Module {
             
             add("Angle", new Action(new FieldMap() {{
                 define("angle", 0D);
+                define("alignTime", 3D);
             }}) {
                 private final Timer timer = new Timer();
-                private boolean aligned = false;
+                private boolean reset = false;
                 
                 public void begin (ActionData data) {
                     ready = false;
-                    aligned = false;
+                    reset = false;
                     
                     pid.setPID(-0.030, 0D, -0.050);
                     pid.setSetpoint(NEUTRAL);
@@ -132,9 +133,9 @@ public class Rotation extends Module {
                 }
 
                 public void run (ActionData data) {
-                    if (!aligned) {
+                    if (!reset) {
                         if (pid.onTarget()) {
-                            aligned = true;
+                            reset = true;
                             
                             pid.reset();
                             pid.setSetpoint(data.get("angle"));
@@ -147,7 +148,7 @@ public class Rotation extends Module {
 
                         if (angle != pid.getSetpoint()) {
                             ready = false;
-                            aligned = false;
+                            reset = false;
                             
                             pid.reset();
                             pid.setSetpoint(NEUTRAL);
@@ -157,7 +158,7 @@ public class Rotation extends Module {
                             timer.reset();
                         }
                         
-                        ready = timer.get() > 3D;
+                        ready = timer.get() > data.get("alignTime");
                     }
                 }
 
@@ -168,7 +169,7 @@ public class Rotation extends Module {
                     timer.reset();
                     
                     ready = false;
-                    aligned = false;
+                    reset = false;
                 }
             });
         }});
