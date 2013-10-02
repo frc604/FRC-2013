@@ -49,7 +49,8 @@ public class TeleopMode extends Coordinator {
             
             /* Shifting */
             {
-                this.bind(new Binding(modules.getModule("Shifter").getAction("High Power"), driveThrottle.buttons.Button1 /* driveController.buttons.RB */));
+                final TriggerToggle highGear = new TriggerToggle(driveThrottle.buttons.Button1, false);
+                this.bind(new Binding(modules.getModule("Shifter").getAction("High Power"), highGear.on /* driveController.buttons.RB */));
             }
             
         }
