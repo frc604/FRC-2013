@@ -10,7 +10,6 @@ import com._604robotics.robotnik.prefabs.controller.wheel.WheelController;
 import com._604robotics.robotnik.prefabs.controller.xbox.XboxController;
 import com._604robotics.robotnik.prefabs.trigger.TriggerAlways;
 import com._604robotics.robotnik.prefabs.trigger.TriggerToggle;
-import com._604robotics.robotnik.trigger.TriggerAccess;
 
 public class TeleopMode extends Coordinator {
     private final WheelController driveWheel = new WheelController(1);
@@ -20,6 +19,7 @@ public class TeleopMode extends Coordinator {
     private final XboxController manipController = new XboxController(3 /* 2 */);
     
     public TeleopMode () {
+        this.driveWheel.axis.setFactor(-1D);
         this.manipController.leftStick.Y.setDeadband(0.2);
     }
     
