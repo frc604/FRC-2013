@@ -10,6 +10,7 @@ import com._604robotics.robotnik.prefabs.controller.wheel.WheelController;
 import com._604robotics.robotnik.prefabs.controller.xbox.XboxController;
 import com._604robotics.robotnik.prefabs.trigger.TriggerAlways;
 import com._604robotics.robotnik.prefabs.trigger.TriggerToggle;
+import com._604robotics.robotnik.trigger.TriggerAccess;
 
 public class TeleopMode extends Coordinator {
     private final WheelController driveWheel = new WheelController(1);
@@ -35,7 +36,6 @@ public class TeleopMode extends Coordinator {
                 this.fill(new DataWire(modules.getModule("Drive").getAction("Racecar Drive"), "wheel", driveWheel.axis));
                 this.fill(new DataWire(modules.getModule("Drive").getAction("Racecar Drive"), "throttle", driveThrottle.axisY));
                 
-                this.fill(new DataWire(modules.getModule("Drive").getAction("Racecar Drive"), "powered", driveThrottle.buttons.Button3));
                 this.fill(new DataWire(modules.getModule("Drive").getAction("Racecar Drive"), "sharp", driveWheel.buttons.LeftPad));
             }
             

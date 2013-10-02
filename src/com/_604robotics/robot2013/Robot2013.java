@@ -13,6 +13,7 @@ import com._604robotics.robot2013.modules.PneumaticHanger;
 import com._604robotics.robot2013.modules.Rotation;
 import com._604robotics.robot2013.modules.Targets;
 import com._604robotics.robot2013.systems.DashboardSystem;
+import com._604robotics.robot2013.systems.DrivingSystem;
 import com._604robotics.robot2013.systems.ShootingSystem;
 import com._604robotics.robotnik.Robot;
 import com._604robotics.robotnik.coordinator.CoordinatorList;
@@ -37,6 +38,7 @@ public class Robot2013 extends Robot {
         this.set(new CoordinatorList() {{
             add(new DashboardSystem());
             add(new ShootingSystem());
+            add(new DrivingSystem());
         }});
         
         this.set(new ModeMap() {{
