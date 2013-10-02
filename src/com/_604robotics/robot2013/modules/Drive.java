@@ -7,6 +7,7 @@ import com._604robotics.robotnik.action.field.FieldMap;
 import com._604robotics.robotnik.module.Module;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 
 public class Drive extends Module {
@@ -45,15 +46,22 @@ public class Drive extends Module {
                 define("powered", false);
                 define("sharp", false);
             }}) {
+                private final Timer timer = new Timer();
                 private double lastWheel;
                 
                 public void begin (ActionData data) {
                     lastWheel = data.get("wheel");
                     
                     drive.tankDrive(0D, 0D);
+                    
+                    timer.reset();
+                    timer.start();
                 }
                 
                 public void run (ActionData data) {
+                    if (timer.get() < 0.02) return;
+                    timer.reset();
+                        
                     final boolean powered = data.is("powered");
                     final boolean sharp   = data.is("sharp");
                     
@@ -92,6 +100,8 @@ public class Drive extends Module {
                 
                 public void end (ActionData data) {
                     drive.tankDrive(0D, 0D);
+                    
+                    timer.stop();
                 }
                 
                 private double smoothWheel (double wheel, boolean powered) {
