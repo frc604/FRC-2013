@@ -5,12 +5,18 @@ import com._604robotics.robotnik.coordinator.Coordinator;
 import com._604robotics.robotnik.coordinator.connectors.Binding;
 import com._604robotics.robotnik.coordinator.connectors.DataWire;
 import com._604robotics.robotnik.module.ModuleManager;
+import com._604robotics.robotnik.prefabs.controller.joystick.JoystickController;
+import com._604robotics.robotnik.prefabs.controller.wheel.WheelController;
 import com._604robotics.robotnik.prefabs.controller.xbox.XboxController;
+import com._604robotics.robotnik.prefabs.trigger.TriggerAlways;
 import com._604robotics.robotnik.prefabs.trigger.TriggerToggle;
 
 public class TeleopMode extends Coordinator {
-    private final XboxController driveController = new XboxController(1);
-    private final XboxController manipController = new XboxController(2);
+    private final WheelController driveWheel = new WheelController(1);
+    private final JoystickController driveThrottle = new JoystickController(2);
+    
+    //private final XboxController driveController = new XboxController(1);
+    private final XboxController manipController = new XboxController(3 /* 2 */);
     
     public TeleopMode () {
         this.manipController.leftStick.Y.setDeadband(0.2);
@@ -21,13 +27,21 @@ public class TeleopMode extends Coordinator {
         {
             /* Drive */
             {
-                this.fill(new DataWire(modules.getModule("Drive").getAction("Tank Drive"), "left", driveController.leftStick.Y));
-                this.fill(new DataWire(modules.getModule("Drive").getAction("Tank Drive"), "right", driveController.rightStick.Y));
+                //this.fill(new DataWire(modules.getModule("Drive").getAction("Tank Drive"), "left",  driveController.leftStick.Y));
+                //this.fill(new DataWire(modules.getModule("Drive").getAction("Tank Drive"), "right", driveController.rightStick.Y));
+                
+                this.bind(new Binding(modules.getModule("Drive").getAction("Racecar Drive"), TriggerAlways.getInstance()));
+                
+                this.fill(new DataWire(modules.getModule("Drive").getAction("Racecar Drive"), "wheel", driveWheel.axis));
+                this.fill(new DataWire(modules.getModule("Drive").getAction("Racecar Drive"), "throttle", driveThrottle.axisY));
+                
+                this.fill(new DataWire(modules.getModule("Drive").getAction("Racecar Drive"), "powered", driveThrottle.buttons.Button3));
+                this.fill(new DataWire(modules.getModule("Drive").getAction("Racecar Drive"), "sharp", driveWheel.buttons.LeftPad));
             }
             
             /* Hanging */
             {
-                final TriggerToggle pneumaticHanger = new TriggerToggle(driveController.buttons.RT, false);
+                final TriggerToggle pneumaticHanger = new TriggerToggle(driveThrottle.buttons.Button2 /* driveController.buttons.RT */, false);
                 
                 this.bind(new Binding(modules.getModule("Pneumatic Hanger").getAction("Off"), pneumaticHanger.off));
                 this.bind(new Binding(modules.getModule("Pneumatic Hanger").getAction("On"), pneumaticHanger.on));
@@ -35,7 +49,7 @@ public class TeleopMode extends Coordinator {
             
             /* Shifting */
             {
-                this.bind(new Binding(modules.getModule("Shifter").getAction("High Power"), driveController.buttons.RB));
+                this.bind(new Binding(modules.getModule("Shifter").getAction("High Power"), driveThrottle.buttons.Button1 /* driveController.buttons.RB */));
             }
             
         }

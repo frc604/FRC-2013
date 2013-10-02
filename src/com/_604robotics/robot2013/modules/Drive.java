@@ -19,7 +19,13 @@ public class Drive extends Module {
         drive.setInvertedMotor(MotorType.kRearRight, true);
         
         this.set(new ElasticController() {{
-            addDefault("Tank Drive", new Action(new FieldMap() {{
+            addDefault("Off", new Action() {
+               public void run (ActionData data) {
+                   drive.tankDrive(0D, 0D);
+               }
+            });
+            
+            add("Tank Drive", new Action(new FieldMap() {{
                 define("left", 0D);
                 define("right", 0D);
             }}) {
@@ -28,12 +34,6 @@ public class Drive extends Module {
                }
                
                public void end (ActionData data) {
-                   drive.tankDrive(0D, 0D);
-               }
-            });
-
-            add("Off", new Action() {
-               public void run (ActionData data) {
                    drive.tankDrive(0D, 0D);
                }
             });
