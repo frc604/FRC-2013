@@ -10,12 +10,9 @@ import com._604robotics.robotnik.prefabs.trigger.TriggerToggle;
 
 public class TeleopMode extends Coordinator {
     private final XboxController driveController = new XboxController(1);
-    private final XboxController manipController = new XboxController(3 /* 2 */);
+    private final XboxController manipController = new XboxController(2);
     
     public TeleopMode () {
-        this.driveController.leftStick.Y.setFactor(-1D);
-        this.driveController.rightStick.Y.setFactor(-1D);
-        
         this.manipController.leftStick.Y.setDeadband(0.2);
     }
     
