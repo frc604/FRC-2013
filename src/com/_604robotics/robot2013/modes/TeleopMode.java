@@ -26,6 +26,8 @@ public class TeleopMode extends Coordinator {
             {
                 this.fill(new DataWire(modules.getModule("Drive").getAction("Tank Drive"), "left",  driveController.leftStick.Y));
                 this.fill(new DataWire(modules.getModule("Drive").getAction("Tank Drive"), "right", driveController.rightStick.Y));
+                
+                this.fill(new DataWire(modules.getModule("Drive").getAction("Tank Drive"), "scaled", driveController.buttons.LB));
             }
             
             /* Hanging */
