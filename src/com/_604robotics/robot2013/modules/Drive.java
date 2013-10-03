@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import edu.wpi.first.wpilibj.Victor;
 
 public class Drive extends Module {
-    private final RobotDrive drive = new RobotDrive(new Victor(7), new Victor(1));
+    private final RobotDrive drive = new RobotDrive(new Victor(1), new Victor(7));
     
     public Drive () {
         drive.setInvertedMotor(MotorType.kFrontLeft, true);
@@ -24,7 +24,7 @@ public class Drive extends Module {
                 define("right", 0D);
             }}) {
                public void run (ActionData data) {
-                   drive.tankDrive(data.get("right") * -1, data.get("left") * -1);
+                   drive.tankDrive(data.get("left"), data.get("right"));
                }
                
                public void end (ActionData data) {
