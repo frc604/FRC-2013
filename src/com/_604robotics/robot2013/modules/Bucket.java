@@ -59,6 +59,8 @@ public class Bucket extends Module {
                 }
 
                 public void end (ActionData data) {
+                    count = 1;
+                    
                     solenoid.set(Value.kReverse);
                 }
             });
