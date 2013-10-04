@@ -28,7 +28,7 @@ public class Drive extends Module {
             }}) {
                public void run (ActionData data) {
                    if (data.is("scaled")) {
-                       drive.tankDrive(MathUtils.pow(data.get("left"), 2), MathUtils.pow(data.get("right"), 2));
+                       drive.tankDrive(scale(data.get("left")), scale(data.get("right")));
                    } else {
                        drive.tankDrive(data.get("left"), data.get("right"));
                    }
@@ -36,6 +36,14 @@ public class Drive extends Module {
                
                public void end (ActionData data) {
                    drive.tankDrive(0D, 0D);
+               }
+               
+               private double polarity (double value) {
+                   return value < 0 ? -1D : 1D;
+               }
+               
+               private double scale (double value) {
+                   return MathUtils.pow(value, 2) * polarity(value);
                }
             });
         }});
