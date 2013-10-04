@@ -11,7 +11,7 @@ public class AutonomousMode extends Coordinator {
     public void apply (ModuleManager modules) {
         this.bind(new Binding(modules.getModule("Shooter").getAction("On"), new TriggerToggle(modules.getModule("Bucket").getTrigger("Emptied"), true).on));
             
-        this.fill(new DataWire(modules.getModule("Rotation").getAction("Angle"), "angle", modules.getModule("Targets").getData("Top Angle")));
+        this.fill(new DataWire(modules.getModule("Rotation").getAction("Angle"), "angle", modules.getModule("Targets").getData("Middle Angle")));
         this.bind(new Binding(modules.getModule("Rotation").getAction("Angle"), TriggerAlways.getInstance()));
     }
 }
