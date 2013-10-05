@@ -79,34 +79,8 @@ public class Rotation extends Module {
                     ready = true;
 
                     pid.setPID(-.025, 0, -.020);
-                    pid.setSetpoint(-2D);
+                    pid.setSetpoint(-2.5D);
                     pid.enable();
-                }
-                
-                public void end (ActionData data) {
-                    ready = false;
-
-                    pid.reset();
-                }
-            });
-            
-            add("Load", new Action(new FieldMap() {{
-                define("angle", -10D);
-            }}) {
-                public void begin (ActionData data) {
-                    ready = true;
-
-                    pid.setPID(-.025, 0, -.020);
-                    pid.setSetpoint(data.get("angle"));
-                    pid.enable();
-                }
-                
-                public void run (ActionData data) {
-                    final double angle = data.get("angle");
-
-                    if (angle != pid.getSetpoint()) {
-                        pid.setSetpoint(data.get("angle"));
-                    }
                 }
                 
                 public void end (ActionData data) {

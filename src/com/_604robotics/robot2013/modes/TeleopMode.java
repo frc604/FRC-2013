@@ -51,11 +51,6 @@ public class TeleopMode extends Coordinator {
                 {
                     this.fill(new DataWire(modules.getModule("Rotation").getAction("Manual"), "power", manipController.leftStick.Y));
                 }
-                
-                /* Stow */
-                {
-                    this.bind(new Binding(modules.getModule("Rotation").getAction("Stow"), manipController.buttons.B));
-                }
             }
             
             /* Feeding */
@@ -68,8 +63,8 @@ public class TeleopMode extends Coordinator {
                 
                 /* Station */
                 {
-                    this.bind(new Binding(modules.getModule("Feeder").getAction("In"), manipController.buttons.RightStick));
-                    this.bind(new Binding(modules.getModule("Rotation").getAction("Load"), manipController.buttons.RightStick));
+                    this.bind(new Binding(modules.getModule("Feeder").getAction("In"), manipController.buttons.B));
+                    this.bind(new Binding(modules.getModule("Rotation").getAction("Stow"), manipController.buttons.B));
                 }
             }
             
