@@ -6,7 +6,9 @@ import com._604robotics.robotnik.coordinator.connectors.Binding;
 import com._604robotics.robotnik.coordinator.connectors.DataWire;
 import com._604robotics.robotnik.module.ModuleManager;
 import com._604robotics.robotnik.prefabs.controller.xbox.XboxController;
+import com._604robotics.robotnik.prefabs.trigger.TriggerOr;
 import com._604robotics.robotnik.prefabs.trigger.TriggerToggle;
+import com._604robotics.robotnik.trigger.TriggerAccess;
 
 public class TeleopMode extends Coordinator {
     private final XboxController driveController = new XboxController(1);
@@ -63,8 +65,13 @@ public class TeleopMode extends Coordinator {
                 
                 /* Station */
                 {
-                    this.bind(new Binding(modules.getModule("Feeder").getAction("In"), manipController.buttons.B));
-                    this.bind(new Binding(modules.getModule("Rotation").getAction("Stow"), manipController.buttons.B));
+                    final TriggerAccess station = new TriggerOr(new TriggerAccess[] {
+                        manipController.buttons.B,
+                        manipController.buttons.RightStick
+                    });
+                    
+                    this.bind(new Binding(modules.getModule("Feeder").getAction("In"), station));
+                    this.bind(new Binding(modules.getModule("Rotation").getAction("Stow"), station));
                 }
             }
             
