@@ -1,14 +1,11 @@
 package com._604robotics.robotnik.action;
 
-import com._604robotics.robotnik.action.field.ActionData;
-import com._604robotics.robotnik.action.field.Field;
 import com._604robotics.robotnik.data.DataRecipient;
 import com._604robotics.robotnik.module.ModuleReference;
 import com._604robotics.robotnik.networking.IndexedTable;
 import com._604robotics.robotnik.prefabs.trigger.TriggerManual;
 import com._604robotics.robotnik.trigger.TriggerAccess;
 import com._604robotics.robotnik.trigger.TriggerRecipient;
-import java.util.Enumeration;
 
 public class ActionReference implements DataRecipient, TriggerRecipient {
     private final Action action;
@@ -29,21 +26,12 @@ public class ActionReference implements DataRecipient, TriggerRecipient {
         this.name = name;
         
         this.dataTable = table.getSubTable("data").getSubTable(name);        
-        this.actionData = new ActionData(this.action.getFieldNames(), this.dataTable);
+        this.actionData = new ActionData(this.action.getFieldMap(), this.dataTable);
     }
     
     public void reset () {
         this.triggerTable.putNumber(this.name, 0D);
-        
-        final Enumeration fields = this.action.getFields();
-        
-        Field field;
-        
-        while (fields.hasMoreElements()) {
-            field = (Field) fields.nextElement();
-            
-            this.dataTable.putNumber(field.getName(), field.getDefaultValue());
-        }
+        this.actionData.reset();
     }
     
     public void sendTrigger (double precedence) {

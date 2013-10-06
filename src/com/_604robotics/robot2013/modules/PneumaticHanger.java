@@ -2,7 +2,7 @@ package com._604robotics.robot2013.modules;
 
 import com._604robotics.robotnik.action.Action;
 import com._604robotics.robotnik.action.controllers.StateController;
-import com._604robotics.robotnik.action.field.ActionData;
+import com._604robotics.robotnik.action.ActionData;
 import com._604robotics.robotnik.module.Module;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
