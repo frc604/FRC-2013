@@ -24,7 +24,7 @@ public class TimeSampler {
         this.samples++;
         
         if (this.timer.get() >= this.time) {
-            System.out.println(" --- " + name + " time: " + (this.timer.get() / this.samples) + " ms");
+            System.out.println(" --- " + name + " time: " + (this.timer.get() / this.samples) + " ms (n = " + this.samples + ")");
 
             this.samples = 0;
             this.timer.reset();
