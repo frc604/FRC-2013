@@ -1,9 +1,7 @@
 package com._604robotics.robotnik.action.turnpike;
 
 import com._604robotics.robotnik.data.DataAccess;
-import com._604robotics.robotnik.data.DataReference;
 import com._604robotics.robotnik.trigger.TriggerAccess;
-import com._604robotics.robotnik.trigger.TriggerReference;
 
 // FIXME: I need a severe cleaning up!
 public class Turnpike implements DataAccess {
@@ -17,12 +15,12 @@ public class Turnpike implements DataAccess {
     private int totalCount = 0;
     private int receivedCount = 0;
     
-    public TurnpikeTriggerRecipient generate (DataReference ref) {
+    public TurnpikeTriggerRecipient generate (DataAccess ref) {
         this.totalCount++;
         return new TurnpikeTriggerRecipient(this, ref);
     }
     
-    public TurnpikeTriggerRecipient generate (TriggerReference ref) {
+    public TurnpikeTriggerRecipient generate (TriggerAccess ref) {
         this.totalCount++;
         return new TurnpikeTriggerRecipient(this, ref);
     }
