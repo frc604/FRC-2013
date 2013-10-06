@@ -10,11 +10,11 @@ public class DataMap {
         this.dataTable.put(name, data);
     }
     
-    protected Enumeration getDataNames () {
-        return this.dataTable.keys();
-    }
-    
     protected Data getData (String name) {
         return (Data) this.dataTable.get(name);
+    }
+    
+    protected Enumeration enumerateNames () {
+        return this.dataTable.keys();
     }
 }

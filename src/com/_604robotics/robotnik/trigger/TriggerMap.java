@@ -10,11 +10,11 @@ public class TriggerMap {
         this.triggerTable.put(name, trigger);
     }
     
-    protected Enumeration getTriggerNames () {
-        return this.triggerTable.keys();
-    }
-    
     protected Trigger getTrigger (String name) {
         return (Trigger) this.triggerTable.get(name);
+    }
+    
+    protected Enumeration enumerateNames () {
+        return this.triggerTable.keys();
     }
 }

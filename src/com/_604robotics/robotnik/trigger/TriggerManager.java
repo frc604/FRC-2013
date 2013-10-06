@@ -8,7 +8,7 @@ public class TriggerManager {
     private final Hashtable triggerTable = new Hashtable();
     
     public TriggerManager (TriggerMap triggerMap, IndexedTable table) {
-        final Enumeration triggerNames = triggerMap.getTriggerNames();
+        final Enumeration triggerNames = triggerMap.enumerateNames();
         
         String name;
         Trigger trigger;

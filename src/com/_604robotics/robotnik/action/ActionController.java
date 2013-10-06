@@ -23,11 +23,11 @@ public abstract class ActionController {
         return this.defaultAction;
     }
     
-    protected Enumeration getActionNames () {
-        return this.actionTable.keys();
-    }
-    
     protected Action getAction (String name) {
         return (Action) this.actionTable.get(name);
+    }
+    
+    protected Enumeration enumerateNames () {
+        return this.actionTable.keys();
     }
 }

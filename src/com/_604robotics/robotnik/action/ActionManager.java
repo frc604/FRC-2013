@@ -8,14 +8,12 @@ import java.util.Hashtable;
 public class ActionManager {
     private final Hashtable actionTable = new Hashtable();
     
-    private final ModuleReference module;
     private final ActionController actionController;
     
     private final IndexedTable statusTable;
     private final IndexedTable triggerTable;
     
     public ActionManager (ModuleReference module, ActionController actionController, IndexedTable table) {
-        this.module = module;
         this.actionController = actionController;
         
         this.statusTable = table.getSubTable("status");
@@ -24,7 +22,7 @@ public class ActionManager {
         this.statusTable.putString("triggeredAction", "");
         this.statusTable.putString("lastAction", "");
         
-        final Enumeration actionNames = actionController.getActionNames();
+        final Enumeration actionNames = actionController.enumerateNames();
         
         String name;
         Action action;
@@ -60,7 +58,7 @@ public class ActionManager {
         String topAction = "";
         double topPrecedence = 0D;
         
-        final Enumeration actionNames = actionController.getActionNames();
+        final Enumeration actionNames = actionController.enumerateNames();
         
         String name;
         double precedence;

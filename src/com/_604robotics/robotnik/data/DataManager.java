@@ -8,7 +8,7 @@ public class DataManager {
     private final Hashtable dataTable = new Hashtable();
     
     public DataManager (DataMap dataMap, IndexedTable table) {
-        final Enumeration dataNames = dataMap.getDataNames();
+        final Enumeration dataNames = dataMap.enumerateNames();
         
         String name;
         Data data;
