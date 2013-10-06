@@ -2,7 +2,6 @@ package com._604robotics.robotnik.action;
 
 import com._604robotics.robotnik.action.field.ActionData;
 import com._604robotics.robotnik.action.field.FieldMap;
-import com._604robotics.robotnik.action.measure.Measure;
 import com._604robotics.robotnik.module.ModuleReference;
 import java.util.Enumeration;
 import java.util.Vector;
@@ -23,8 +22,6 @@ public abstract class Action {
     public void end (ActionData data) {}
     
     public void apply (ModuleReference module) {}
-    
-    public Measure measure (double value) { return null; }
     
     protected Enumeration getFields () {
         return this.fieldMap.getFields();

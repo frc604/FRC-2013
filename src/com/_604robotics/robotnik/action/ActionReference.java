@@ -2,7 +2,6 @@ package com._604robotics.robotnik.action;
 
 import com._604robotics.robotnik.action.field.ActionData;
 import com._604robotics.robotnik.action.field.Field;
-import com._604robotics.robotnik.action.measure.Measure;
 import com._604robotics.robotnik.data.DataRecipient;
 import com._604robotics.robotnik.module.ModuleReference;
 import com._604robotics.robotnik.networking.IndexedTable;
@@ -71,10 +70,6 @@ public class ActionReference implements DataRecipient, TriggerRecipient {
     public void end () {
         this.action.end(this.actionData);
         this.activeTrigger.set(false);
-    }
-    
-    public Measure measure (double value) {
-        return this.action.measure(value);
     }
     
     public TriggerAccess getActiveTrigger () {
