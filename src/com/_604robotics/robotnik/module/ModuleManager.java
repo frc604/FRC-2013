@@ -26,7 +26,7 @@ public class ModuleManager {
         
         if (ref == null) {
             System.err.println("WARNING: Missing ModuleReference - " + name);
-            new Error().printStackTrace();;
+            new Error().printStackTrace();
         }
         
         return ref;
