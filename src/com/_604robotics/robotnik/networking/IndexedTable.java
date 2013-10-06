@@ -26,6 +26,10 @@ public class IndexedTable {
     private final Set keys = new Set();
     private final ITable table;
     
+    public boolean knowsAbout (String key) {
+        return this.keys.contains(key);
+    }
+    
     private IndexedTable (ITable table) {
         this.table = table;
     }
