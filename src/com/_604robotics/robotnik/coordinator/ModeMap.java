@@ -3,17 +3,12 @@ package com._604robotics.robotnik.coordinator;
 import com._604robotics.robotnik.module.ModuleManager;
 
 public class ModeMap {
-    private Coordinator autonomousMode = null;
-    private Coordinator teleopMode = null;
+    private Coordinator autonomousMode = new Coordinator();
+    private Coordinator teleopMode = new Coordinator();
     
     public void attach (ModuleManager modules) {
-        if (this.autonomousMode != null) {
-            this.autonomousMode.attach(modules);
-        }
-        
-        if (this.teleopMode != null) {
-            this.teleopMode.attach(modules);
-        }
+        this.autonomousMode.attach(modules);
+        this.teleopMode.attach(modules);
     }
     
     protected void setAutonomousMode (Coordinator autonomousMode) {

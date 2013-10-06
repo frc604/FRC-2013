@@ -6,11 +6,11 @@ import com._604robotics.robotnik.module.ModuleManager;
 import java.util.Enumeration;
 import java.util.Vector;
 
-public abstract class Coordinator {
+public class Coordinator {
     private final Vector triggerBindings = new Vector();
     private final Vector dataWires = new Vector();
     
-    protected abstract void apply (ModuleManager modules);
+    protected void apply (ModuleManager modules) {}
     
     public void attach (ModuleManager modules) {
         this.triggerBindings.removeAllElements();

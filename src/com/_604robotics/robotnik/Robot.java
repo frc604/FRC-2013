@@ -14,10 +14,10 @@ public class Robot extends SimpleRobot {
     
     private final TimeSampler loopTime = new TimeSampler("Loop", 1D);
     
-    private ModuleManager moduleManager;
+    private ModuleManager moduleManager = new ModuleManager(new ModuleMap(), this.table.getSubTable("modules"));
     
-    private CoordinatorList coordinatorList = null;
-    private ModeMap modeMap = null;
+    private CoordinatorList coordinatorList = new CoordinatorList();
+    private ModeMap modeMap = new ModeMap();
     
     protected void set (ModuleMap moduleMap) {
         this.moduleManager = new ModuleManager(moduleMap, this.table.getSubTable("modules"));
@@ -32,27 +32,17 @@ public class Robot extends SimpleRobot {
     }
     
     public void robotInit () {
-        if (this.coordinatorList != null) {
-            this.coordinatorList.apply(this.moduleManager);
-        }
+        this.coordinatorList.apply(this.moduleManager);
+        this.modeMap.attach(this.moduleManager);
     }
     
     public void autonomous () {
         System.out.println(" -- Autonomous mode begin.");
         
-        if (this.modeMap != null) {
-            this.modeMap.attach(this.moduleManager);
-        }
-        
         this.loopTime.start();
-        
-        Coordinator mode = null;
-        
-        if (this.modeMap != null) {
-            mode = this.modeMap.getAutonomousMode();
-        }
-        
         this.moduleManager.begin();
+        
+        final Coordinator mode = this.modeMap.getAutonomousMode();
         
         while (this.isEnabled() && this.isAutonomous()) {
             this.tick(mode);
@@ -60,7 +50,6 @@ public class Robot extends SimpleRobot {
         }
         
         this.moduleManager.end();
-        
         this.loopTime.stop();
 
         System.out.println(" -- Autonomous mode end.");
@@ -69,19 +58,10 @@ public class Robot extends SimpleRobot {
     public void operatorControl () {
         System.out.println(" -- Teleop mode begin.");
         
-        if (this.modeMap != null) {
-            this.modeMap.attach(this.moduleManager);
-        }
-        
         this.loopTime.start();
-        
-        Coordinator mode = null;
-        
-        if (this.modeMap != null) {
-            mode = this.modeMap.getTeleopMode();
-        }
-        
         this.moduleManager.begin();
+        
+        final Coordinator mode = this.modeMap.getTeleopMode();
         
         while (this.isEnabled() && this.isOperatorControl()) {
             this.tick(mode);
@@ -89,7 +69,6 @@ public class Robot extends SimpleRobot {
         }
         
         this.moduleManager.end();
-        
         this.loopTime.stop();
         
         System.out.println(" -- Teleop mode end.");
@@ -107,14 +86,9 @@ public class Robot extends SimpleRobot {
     
     private void tick (Coordinator mode) {
         this.moduleManager.update();
-
-        if (this.coordinatorList != null) {
-            this.coordinatorList.update();
-        }
         
-        if (mode != null) {
-            mode.update();
-        }
+        this.coordinatorList.update();
+        mode.update();
         
         this.moduleManager.execute();
     }
