@@ -1,19 +1,22 @@
 package com._604robotics.robotnik.action;
 
+import com._604robotics.robotnik.meta.Iterator;
+import com._604robotics.robotnik.meta.Repackager;
+import com._604robotics.robotnik.meta.Scorekeeper;
 import com._604robotics.robotnik.module.ModuleReference;
 import com._604robotics.robotnik.networking.IndexedTable;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
 public class ActionManager {
-    private final Hashtable actionTable = new Hashtable();
+    private final Hashtable actionTable;
     
     private final ActionController actionController;
     
     private final IndexedTable statusTable;
     private final IndexedTable triggerTable;
     
-    public ActionManager (ModuleReference module, ActionController actionController, IndexedTable table) {
+    public ActionManager (final ModuleReference module, ActionController actionController, final IndexedTable table) {
         this.actionController = actionController;
         
         this.statusTable = table.getSubTable("status");
@@ -22,17 +25,11 @@ public class ActionManager {
         this.statusTable.putString("triggeredAction", "");
         this.statusTable.putString("lastAction", "");
         
-        final Enumeration actionNames = actionController.enumerateNames();
-        
-        String name;
-        Action action;
-        
-        while (actionNames.hasMoreElements()) {
-            name = (String) actionNames.nextElement();
-            action = actionController.getAction(name);
-            
-            this.actionTable.put(name, new ActionReference(module, action, table, name));
-        }
+        this.actionTable = Repackager.repackage(actionController.iterate(), new Repackager() {
+           public Object wrap (Object key, Object value) {
+               return new ActionReference(module, (Action) value, table, (String) key);
+           }
+        });
     }
     
     public ActionReference getAction (String name) {
@@ -47,33 +44,22 @@ public class ActionManager {
     }
     
     public void reset () {
-        final Enumeration i = this.actionTable.elements();
+        final Iterator i = new Iterator(this.actionTable);
         
-        while (i.hasMoreElements()) {
-            ((ActionReference) i.nextElement()).reset();
+        while (i.next()) {
+            ((ActionReference) i.value).reset();
         }
     }
     
     public void update () {
-        String topAction = "";
-        double topPrecedence = 0D;
+        final Scorekeeper r = new Scorekeeper();
+        final Iterator i = actionController.iterate();
         
-        final Enumeration actionNames = actionController.enumerateNames();
-        
-        String name;
-        double precedence;
-        
-        while (actionNames.hasMoreElements()) {
-            name = (String) actionNames.nextElement();
-            precedence = this.triggerTable.getNumber(name, 0D);
-            
-            if (precedence > 0 && precedence > topPrecedence) {
-                topAction = name;
-                topPrecedence = precedence;
-            }
+        while (i.next()) {
+            r.consider(i.key, this.triggerTable.getNumber((String) i.key, 0D));
         }
         
-        this.statusTable.putString("triggeredAction", topAction);
+        this.statusTable.putString("triggeredAction", r.score > 0 ? (String) r.victor : "");
     }
     
     public void execute () {

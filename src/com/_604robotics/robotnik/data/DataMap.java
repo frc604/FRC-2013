@@ -1,6 +1,6 @@
 package com._604robotics.robotnik.data;
 
-import java.util.Enumeration;
+import com._604robotics.robotnik.meta.Iterator;
 import java.util.Hashtable;
 
 public class DataMap {
@@ -14,7 +14,7 @@ public class DataMap {
         return (Data) this.dataTable.get(name);
     }
     
-    protected Enumeration enumerateNames () {
-        return this.dataTable.keys();
+    protected Iterator iterate () {
+        return new Iterator(this.dataTable);
     }
 }

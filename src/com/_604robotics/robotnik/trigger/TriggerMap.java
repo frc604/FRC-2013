@@ -1,6 +1,6 @@
 package com._604robotics.robotnik.trigger;
 
-import java.util.Enumeration;
+import com._604robotics.robotnik.meta.Iterator;
 import java.util.Hashtable;
 
 public class TriggerMap {
@@ -14,7 +14,7 @@ public class TriggerMap {
         return (Trigger) this.triggerTable.get(name);
     }
     
-    protected Enumeration enumerateNames () {
-        return this.triggerTable.keys();
+    protected Iterator iterate () {
+        return new Iterator(this.triggerTable);
     }
 }

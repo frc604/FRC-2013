@@ -1,24 +1,19 @@
 package com._604robotics.robotnik.data;
 
+import com._604robotics.robotnik.meta.Repackager;
 import com._604robotics.robotnik.networking.IndexedTable;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
 public class DataManager {
-    private final Hashtable dataTable = new Hashtable();
+    private final Hashtable dataTable;
     
-    public DataManager (DataMap dataMap, IndexedTable table) {
-        final Enumeration dataNames = dataMap.enumerateNames();
-        
-        String name;
-        Data data;
-        
-        while (dataNames.hasMoreElements()) {
-            name = (String) dataNames.nextElement();
-            data = dataMap.getData(name);
-            
-            this.dataTable.put(name, new DataReference(data, table, name));
-        }
+    public DataManager (DataMap dataMap, final IndexedTable table) {
+        this.dataTable = Repackager.repackage(dataMap.iterate(), new Repackager() {
+           public Object wrap (Object key, Object value) {
+               return new DataReference((Data) value, table, (String) key);
+           }
+        });
     }
     
     public DataReference getData (String name) {

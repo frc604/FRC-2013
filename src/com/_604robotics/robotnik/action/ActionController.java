@@ -1,6 +1,6 @@
 package com._604robotics.robotnik.action;
 
-import java.util.Enumeration;
+import com._604robotics.robotnik.meta.Iterator;
 import java.util.Hashtable;
 
 public abstract class ActionController {
@@ -27,7 +27,7 @@ public abstract class ActionController {
         return (Action) this.actionTable.get(name);
     }
     
-    protected Enumeration enumerateNames () {
-        return this.actionTable.keys();
+    protected Iterator iterate () {
+        return new Iterator(this.actionTable);
     }
 }

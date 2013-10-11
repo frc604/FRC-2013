@@ -1,24 +1,19 @@
 package com._604robotics.robotnik.trigger;
 
+import com._604robotics.robotnik.meta.Repackager;
 import com._604robotics.robotnik.networking.IndexedTable;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
 public class TriggerManager {
-    private final Hashtable triggerTable = new Hashtable();
+    private final Hashtable triggerTable;
     
-    public TriggerManager (TriggerMap triggerMap, IndexedTable table) {
-        final Enumeration triggerNames = triggerMap.enumerateNames();
-        
-        String name;
-        Trigger trigger;
-        
-        while (triggerNames.hasMoreElements()) {
-            name = (String) triggerNames.nextElement();
-            trigger = triggerMap.getTrigger(name);
-            
-            this.triggerTable.put(name, new TriggerReference(trigger, table, name));
-        }
+    public TriggerManager (TriggerMap triggerMap, final IndexedTable table) {
+        this.triggerTable = Repackager.repackage(triggerMap.iterate(), new Repackager() {
+           public Object wrap (Object key, Object value) {
+               return new TriggerReference((Trigger) value, table, (String) key);
+           }
+        });
     }
     
     public TriggerReference getTrigger (String name) {
