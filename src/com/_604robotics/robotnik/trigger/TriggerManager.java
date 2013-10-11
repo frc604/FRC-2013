@@ -1,8 +1,8 @@
 package com._604robotics.robotnik.trigger;
 
+import com._604robotics.robotnik.meta.Iterator;
 import com._604robotics.robotnik.meta.Repackager;
 import com._604robotics.robotnik.networking.IndexedTable;
-import java.util.Enumeration;
 import java.util.Hashtable;
 
 public class TriggerManager {
@@ -28,26 +28,17 @@ public class TriggerManager {
     }
     
     public void begin () {
-        final Enumeration i = this.triggerTable.elements();
-        
-        while (i.hasMoreElements()) {
-            ((TriggerReference) i.nextElement()).begin();
-        }
+        final Iterator i = new Iterator(this.triggerTable);
+        while (i.next()) ((TriggerReference) i.value).begin();
     }
     
     public void update () {
-        final Enumeration i = this.triggerTable.elements();
-        
-        while (i.hasMoreElements()) {
-            ((TriggerReference) i.nextElement()).update();
-        }
+        final Iterator i = new Iterator(this.triggerTable);
+        while (i.next()) ((TriggerReference) i.value).update();
     }
     
     public void end () {
-        final Enumeration i = this.triggerTable.elements();
-        
-        while (i.hasMoreElements()) {
-            ((TriggerReference) i.nextElement()).end();
-        }
+        final Iterator i = new Iterator(this.triggerTable);
+        while (i.next()) ((TriggerReference) i.value).end();
     }
 }

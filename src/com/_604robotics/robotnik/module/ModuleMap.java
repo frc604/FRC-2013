@@ -1,6 +1,6 @@
 package com._604robotics.robotnik.module;
 
-import java.util.Enumeration;
+import com._604robotics.robotnik.meta.Iterator;
 import java.util.Hashtable;
 
 public class ModuleMap {
@@ -10,11 +10,11 @@ public class ModuleMap {
         this.moduleTable.put(name, module);
     }
     
-    protected Enumeration getModuleNames () {
-        return this.moduleTable.keys();
-    }
-    
     protected Module getModule (String name) {
         return (Module) this.moduleTable.get(name);
+    }
+    
+    protected Iterator iterate () {
+        return new Iterator(this.moduleTable);
     }
 }

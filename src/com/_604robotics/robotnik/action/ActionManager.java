@@ -5,7 +5,6 @@ import com._604robotics.robotnik.meta.Repackager;
 import com._604robotics.robotnik.meta.Scorekeeper;
 import com._604robotics.robotnik.module.ModuleReference;
 import com._604robotics.robotnik.networking.IndexedTable;
-import java.util.Enumeration;
 import java.util.Hashtable;
 
 public class ActionManager {
@@ -45,19 +44,14 @@ public class ActionManager {
     
     public void reset () {
         final Iterator i = new Iterator(this.actionTable);
-        
-        while (i.next()) {
-            ((ActionReference) i.value).reset();
-        }
+        while (i.next()) ((ActionReference) i.value).reset();
     }
     
     public void update () {
         final Scorekeeper r = new Scorekeeper();
         final Iterator i = actionController.iterate();
         
-        while (i.next()) {
-            r.consider(i.key, this.triggerTable.getNumber((String) i.key, 0D));
-        }
+        while (i.next()) r.consider(i.key, this.triggerTable.getNumber((String) i.key, 0D));
         
         this.statusTable.putString("triggeredAction", r.score > 0 ? (String) r.victor : "");
     }
