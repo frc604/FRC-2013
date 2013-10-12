@@ -6,6 +6,7 @@ import com._604robotics.robotnik.coordinator.ModeMap;
 import com._604robotics.robotnik.module.ModuleManager;
 import com._604robotics.robotnik.module.ModuleMap;
 import com._604robotics.robotnik.memory.IndexedTable;
+import com._604robotics.robotnik.utils.Logger;
 import com._604robotics.robotnik.utils.TimeSampler;
 import edu.wpi.first.wpilibj.SimpleRobot;
 
@@ -35,7 +36,7 @@ public class Robot extends SimpleRobot {
     }
     
     public void autonomous () {
-        System.out.println(" -- Autonomous mode begin.");
+        Logger.log(" -- Autonomous mode begin.");
         
         this.loopTime.start();
         
@@ -47,11 +48,11 @@ public class Robot extends SimpleRobot {
         
         this.loopTime.stop();
 
-        System.out.println(" -- Autonomous mode end.");
+        Logger.log(" -- Autonomous mode end.");
     }
     
     public void operatorControl () {
-        System.out.println(" -- Teleop mode begin.");
+        Logger.log(" -- Teleop mode begin.");
         
         this.loopTime.start();
         
@@ -63,15 +64,15 @@ public class Robot extends SimpleRobot {
         
         this.loopTime.stop();
         
-        System.out.println(" -- Teleop mode end.");
+        Logger.log(" -- Teleop mode end.");
     }
     
     public void disabled () {
-        System.out.println(" -- Disabled mode begin.");
+        Logger.log(" -- Disabled mode begin.");
         
         while (!this.isEnabled()) this.moduleManager.update();
         
-        System.out.println(" -- Disabled mode end.");
+        Logger.log(" -- Disabled mode end.");
     }
     
     private void tick (Coordinator mode) {

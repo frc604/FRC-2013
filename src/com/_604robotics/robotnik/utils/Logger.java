@@ -5,4 +5,8 @@ public class Logger {
         System.err.println("WARNING: Missing " + type + " - " + name);
         new Error().printStackTrace();
     }
+    
+    public static void log (String message) {
+        System.out.println("[INFO] " + message);
+    }
 }
