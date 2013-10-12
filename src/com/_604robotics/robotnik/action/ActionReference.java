@@ -2,8 +2,8 @@ package com._604robotics.robotnik.action;
 
 import com._604robotics.robotnik.data.DataRecipient;
 import com._604robotics.robotnik.module.ModuleReference;
-import com._604robotics.robotnik.networking.IndexedTable;
-import com._604robotics.robotnik.networking.IndexedTable.Slice;
+import com._604robotics.robotnik.memory.IndexedTable;
+import com._604robotics.robotnik.memory.IndexedTable.Slice;
 import com._604robotics.robotnik.prefabs.trigger.TriggerManual;
 import com._604robotics.robotnik.trigger.TriggerAccess;
 import com._604robotics.robotnik.trigger.TriggerRecipient;

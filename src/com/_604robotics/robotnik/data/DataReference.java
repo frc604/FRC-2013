@@ -1,6 +1,6 @@
 package com._604robotics.robotnik.data;
 
-import com._604robotics.robotnik.networking.IndexedTable.Slice;
+import com._604robotics.robotnik.memory.IndexedTable.Slice;
 
 public class DataReference implements DataAccess {
     private final Data data;

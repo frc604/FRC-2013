@@ -1,6 +1,6 @@
 package com._604robotics.robotnik.trigger;
 
-import com._604robotics.robotnik.networking.IndexedTable.Slice;
+import com._604robotics.robotnik.memory.IndexedTable.Slice;
 
 public class TriggerReference implements TriggerAccess {
     private final Trigger trigger;
