@@ -10,12 +10,12 @@ public class TriggerAnd implements TriggerAccess {
     }
     
     public boolean get () {
-        boolean process = true;
+        boolean value = true;
         
         for (int i = 0; i < this.triggers.length; i++) {
-            process = this.triggers[i].get() && process;
+            value = this.triggers[i].get() && value;
         }
         
-        return process;
+        return value;
     }
 }

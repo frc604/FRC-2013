@@ -18,7 +18,7 @@ public class NetworkOutput {
             table = table.getSubTable(tokens.nextToken());
         }
         
-        this.doubleRecipient = new NetworkOutputDataRecipient(table, false);
+        this.doubleRecipient  = new NetworkOutputDataRecipient(table, false);
         this.booleanRecipient = new NetworkOutputDataRecipient(table, true);
     }
     

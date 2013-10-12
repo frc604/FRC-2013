@@ -22,7 +22,7 @@ public class TriggerToggle {
     }
     
     public final TriggerAccess off = new TriggerState(false);
-    public final TriggerAccess on = new TriggerState(true);
+    public final TriggerAccess on  = new TriggerState(true);
     
     public TriggerToggle (TriggerAccess trigger, boolean defaultValue) {
         this.trigger = trigger;
