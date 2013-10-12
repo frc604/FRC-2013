@@ -1,9 +1,10 @@
-package com._604robotics.robotnik.utils;
+package com._604robotics.robotnik.prefabs.devices;
 
 import com.sun.squawk.util.MathUtils;
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.PIDSource;
 
+// TODO: Document wiring configuration of this sensor.
 public class AS5145B implements PIDSource {
     private final AnalogChannel channel;
     private double zero = 0D;
