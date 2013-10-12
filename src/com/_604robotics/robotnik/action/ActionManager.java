@@ -8,27 +8,26 @@ import com._604robotics.robotnik.networking.IndexedTable;
 import java.util.Hashtable;
 
 public class ActionManager {
+    private final ActionController controller;
+    
     private final Hashtable actionTable;
-    
-    private final ActionController actionController;
-    
     private final IndexedTable statusTable;
     private final IndexedTable triggerTable;
     
-    public ActionManager (final ModuleReference module, ActionController actionController, final IndexedTable table) {
-        this.actionController = actionController;
+    public ActionManager (final ModuleReference module, ActionController controller, final IndexedTable table) {
+        this.controller = controller;
         
-        this.statusTable = table.getSubTable("status");
-        this.triggerTable = table.getSubTable("triggers");
-        
-        this.statusTable.putString("triggeredAction", "");
-        this.statusTable.putString("lastAction", "");
-        
-        this.actionTable = Repackager.repackage(actionController.iterate(), new Repackager() {
+        this.actionTable = Repackager.repackage(controller.iterate(), new Repackager() {
            public Object wrap (Object key, Object value) {
                return new ActionReference(module, (Action) value, table, (String) key);
            }
         });
+        
+        this.statusTable = table.getSubTable("status");
+        this.statusTable.putString("triggeredAction", "");
+        this.statusTable.putString("lastAction", "");
+        
+        this.triggerTable = table.getSubTable("triggers");
     }
     
     public ActionReference getAction (String name) {
@@ -49,7 +48,7 @@ public class ActionManager {
     
     public void update () {
         final Scorekeeper r = new Scorekeeper();
-        final Iterator i = actionController.iterate();
+        final Iterator i = controller.iterate();
         
         while (i.next()) r.consider(i.key, this.triggerTable.getNumber((String) i.key, 0D));
         
@@ -60,17 +59,15 @@ public class ActionManager {
         final String triggeredAction = this.statusTable.getString("triggeredAction", "");
         final String lastAction = this.statusTable.getString("lastAction", "");
         
-        final String selectedAction = this.actionController.pickAction(lastAction, triggeredAction);
+        final String selectedAction = this.controller.pickAction(lastAction, triggeredAction);
         
-        if (!lastAction.equals("")) {
-            if (!lastAction.equals(selectedAction)) {
-                this.getAction(lastAction).end();
-            }
+        if (!lastAction.equals("") && !lastAction.equals(selectedAction)) {
+            this.getAction(lastAction).end();
         }
 
         if (!selectedAction.equals("")) {
             final ActionReference action = this.getAction(selectedAction);
-
+            
             if (lastAction.equals("") || !lastAction.equals(selectedAction)) {
                 action.begin();
             }

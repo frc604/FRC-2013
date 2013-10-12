@@ -11,11 +11,9 @@ import edu.wpi.first.wpilibj.SimpleRobot;
 
 public class Robot extends SimpleRobot {
     private final IndexedTable table = IndexedTable.getTable("robotnik");
-    
     private final TimeSampler loopTime = new TimeSampler("Loop", 1D);
     
     private ModuleManager moduleManager = new ModuleManager(new ModuleMap(), this.table.getSubTable("modules"));
-    
     private CoordinatorList coordinatorList = new CoordinatorList();
     private ModeMap modeMap = new ModeMap();
     
@@ -32,7 +30,7 @@ public class Robot extends SimpleRobot {
     }
     
     public void robotInit () {
-        this.coordinatorList.apply(this.moduleManager);
+        this.coordinatorList.attach(this.moduleManager);
         this.modeMap.attach(this.moduleManager);
     }
     
@@ -43,7 +41,6 @@ public class Robot extends SimpleRobot {
         this.moduleManager.begin();
         
         final Coordinator mode = this.modeMap.getAutonomousMode();
-        
         while (this.isEnabled() && this.isAutonomous()) {
             this.tick(mode);
             this.loopTime.sample();
@@ -62,7 +59,6 @@ public class Robot extends SimpleRobot {
         this.moduleManager.begin();
         
         final Coordinator mode = this.modeMap.getTeleopMode();
-        
         while (this.isEnabled() && this.isOperatorControl()) {
             this.tick(mode);
             this.loopTime.sample();
@@ -77,9 +73,7 @@ public class Robot extends SimpleRobot {
     public void disabled () {
         System.out.println(" -- Disabled mode begin.");
         
-        while (!this.isEnabled()) {
-            this.moduleManager.update();
-        }
+        while (!this.isEnabled()) this.moduleManager.update();
         
         System.out.println(" -- Disabled mode end.");
     }

@@ -5,7 +5,6 @@ import java.util.Hashtable;
 
 public abstract class ActionController {
     private final Hashtable actionTable = new Hashtable();
-    
     private String defaultAction = "";
     
     protected abstract String pickAction (String lastAction, String triggeredAction);

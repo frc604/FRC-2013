@@ -11,7 +11,7 @@ public class CoordinatorList {
         this.coordinators.addElement(coordinator);
     }
     
-    public void apply (ModuleManager modules) {
+    public void attach (ModuleManager modules) {
         final Enumeration i = this.coordinators.elements();
         
         while (i.hasMoreElements()) {
