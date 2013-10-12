@@ -15,7 +15,7 @@ public class ActionManager {
     private final IndexedTable statusTable;
     private final Hashtable actionTable;
     
-    public ActionManager (final ModuleReference module, ActionController controller, final IndexedTable table) {
+    public ActionManager (ModuleReference module, ActionController controller, final IndexedTable table) {
         this.controller = controller;
         
         this.triggerTable = table.getSubTable("triggers");
@@ -27,7 +27,7 @@ public class ActionManager {
         final IndexedTable dataTable = table.getSubTable("data");
         this.actionTable = Repackager.repackage(controller.iterate(), new Repackager() {
            public Object wrap (Object key, Object value) {
-               return new ActionReference(module, (Action) value, triggerTable.getSlice((String) key), dataTable.getSubTable((String) key));
+               return new ActionReference((Action) value, triggerTable.getSlice((String) key), dataTable.getSubTable((String) key));
            }
         });
     }

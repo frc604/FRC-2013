@@ -1,7 +1,6 @@
 package com._604robotics.robotnik.action;
 
 import com._604robotics.robotnik.action.field.FieldMap;
-import com._604robotics.robotnik.module.ModuleReference;
 
 public abstract class Action {
     private final FieldMap fieldMap;
@@ -17,8 +16,6 @@ public abstract class Action {
     public void begin (ActionData data) {}
     public void run (ActionData data) {}
     public void end (ActionData data) {}
-    
-    public void apply (ModuleReference module) {}
     
     protected FieldMap getFieldMap () {
         return this.fieldMap;

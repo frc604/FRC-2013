@@ -17,9 +17,8 @@ public class ActionReference implements DataRecipient, TriggerRecipient {
     
     private final TriggerManual activeTrigger = new TriggerManual(false);
     
-    public ActionReference (ModuleReference module, Action action, Slice triggered, IndexedTable dataTable) {
+    public ActionReference (Action action, Slice triggered, IndexedTable dataTable) {
         this.action = action;
-        action.apply(module);
         
         this.trigger = triggered;
         this.dataTable = dataTable;        
