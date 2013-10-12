@@ -1,5 +1,6 @@
 package com._604robotics.robotnik.data;
 
+import com._604robotics.robotnik.meta.Iterator;
 import com._604robotics.robotnik.meta.Repackager;
 import com._604robotics.robotnik.networking.IndexedTable;
 import com._604robotics.robotnik.utils.Logger;
@@ -24,26 +25,17 @@ public class DataManager {
     }
     
     public void begin () {
-        final Enumeration i = this.dataTable.elements();
-        
-        while (i.hasMoreElements()) {
-            ((DataReference) i.nextElement()).begin();
-        }
+        final Iterator i = new Iterator(this.dataTable);
+        while (i.next()) ((DataReference) i.value).begin();
     }
     
     public void update () {
-        final Enumeration i = this.dataTable.elements();
-        
-        while (i.hasMoreElements()) {
-            ((DataReference) i.nextElement()).update();
-        }
+        final Iterator i = new Iterator(this.dataTable);
+        while (i.next()) ((DataReference) i.value).update();
     }
     
     public void end () {
-        final Enumeration i = this.dataTable.elements();
-        
-        while (i.hasMoreElements()) {
-            ((DataReference) i.nextElement()).end();
-        }
+        final Iterator i = new Iterator(this.dataTable);
+        while (i.next()) ((DataReference) i.value).end();
     }
 }

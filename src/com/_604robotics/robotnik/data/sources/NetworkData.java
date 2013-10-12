@@ -18,10 +18,7 @@ public class NetworkData extends Data {
         final StringTokenizer tokens = new StringTokenizer(namespace, ".");
         
         ITable workingTable = NetworkTable.getTable(tokens.nextToken());
-        
-        while (tokens.hasMoreTokens()) {
-            workingTable = workingTable.getSubTable(tokens.nextToken());
-        }
+        while (tokens.hasMoreTokens()) workingTable = workingTable.getSubTable(tokens.nextToken());
         
         this.table = workingTable;
     }

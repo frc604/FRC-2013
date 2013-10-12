@@ -13,17 +13,11 @@ public class CoordinatorList {
     
     public void attach (ModuleManager modules) {
         final Enumeration i = this.coordinators.elements();
-        
-        while (i.hasMoreElements()) {
-            ((Coordinator) i.nextElement()).attach(modules);
-        }
+        while (i.hasMoreElements()) ((Coordinator) i.nextElement()).attach(modules);
     }
     
     public void update () {
         final Enumeration i = this.coordinators.elements();
-        
-        while (i.hasMoreElements()) {
-            ((Coordinator) i.nextElement()).update();
-        }
+        while (i.hasMoreElements()) ((Coordinator) i.nextElement()).update();
     }
 }
