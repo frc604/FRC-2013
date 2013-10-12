@@ -42,7 +42,7 @@ public class Robot extends SimpleRobot {
         
         final Coordinator mode = this.modeMap.getAutonomousMode();
         while (this.isEnabled() && this.isAutonomous()) {
-            this.tick(mode);
+            RobotProxy.tick(mode, moduleManager, coordinatorList);
             this.loopTime.sample();
         }
         
@@ -58,7 +58,7 @@ public class Robot extends SimpleRobot {
         
         final Coordinator mode = this.modeMap.getTeleopMode();
         while (this.isEnabled() && this.isOperatorControl()) {
-            this.tick(mode);
+            RobotProxy.tick(mode, moduleManager, coordinatorList);
             this.loopTime.sample();
         }
         
@@ -73,14 +73,5 @@ public class Robot extends SimpleRobot {
         while (!this.isEnabled()) this.moduleManager.update();
         
         Logger.log(" -- Disabled mode end.");
-    }
-    
-    private void tick (Coordinator mode) {
-        this.moduleManager.update();
-        
-        this.coordinatorList.update();
-        mode.update();
-        
-        this.moduleManager.execute();
     }
 }

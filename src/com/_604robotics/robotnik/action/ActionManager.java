@@ -3,19 +3,22 @@ package com._604robotics.robotnik.action;
 import com._604robotics.robotnik.meta.Iterator;
 import com._604robotics.robotnik.meta.Repackager;
 import com._604robotics.robotnik.meta.Scorekeeper;
-import com._604robotics.robotnik.module.ModuleReference;
 import com._604robotics.robotnik.memory.IndexedTable;
-import com._604robotics.robotnik.utils.Logger;
+import com._604robotics.robotnik.utils.InternalLogger;
 import java.util.Hashtable;
 
 public class ActionManager {
+    private final String moduleName;
+    
     private final ActionController controller;
     
     private final IndexedTable triggerTable;
     private final IndexedTable statusTable;
     private final Hashtable actionTable;
     
-    public ActionManager (ModuleReference module, ActionController controller, final IndexedTable table) {
+    public ActionManager (String moduleName, ActionController controller, final IndexedTable table) {
+        this.moduleName = moduleName;
+        
         this.controller = controller;
         
         this.triggerTable = table.getSubTable("triggers");
@@ -34,7 +37,7 @@ public class ActionManager {
     
     public ActionReference getAction (String name) {
         ActionReference ref = (ActionReference) this.actionTable.get(name);
-        if (ref == null) Logger.missing("ActionReference", name);
+        if (ref == null) InternalLogger.missing("ActionReference", name);
         return ref;
     }
     
@@ -59,17 +62,17 @@ public class ActionManager {
         final String selectedAction = this.controller.pickAction(lastAction, triggeredAction);
         
         if (!lastAction.equals("") && !lastAction.equals(selectedAction)) {
-            this.getAction(lastAction).end();
+            ActionProxy.end(moduleName, lastAction, this.getAction(lastAction));
         }
 
         if (!selectedAction.equals("")) {
             final ActionReference action = this.getAction(selectedAction);
             
             if (lastAction.equals("") || !lastAction.equals(selectedAction)) {
-                action.begin();
+                ActionProxy.begin(moduleName, selectedAction, action);
             }
             
-            action.run();
+            ActionProxy.run(moduleName, selectedAction, action);
         }
         
         this.statusTable.putString("lastAction", selectedAction);
@@ -79,7 +82,7 @@ public class ActionManager {
         final String lastAction = this.statusTable.getString("lastAction", "");
         
         if (!lastAction.equals("")) {
-            this.getAction(lastAction).end();
+            ActionProxy.end(moduleName, lastAction, this.getAction(lastAction));
         }
         
         this.statusTable.putString("lastAction", "");

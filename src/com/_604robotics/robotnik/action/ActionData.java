@@ -3,7 +3,7 @@ package com._604robotics.robotnik.action;
 import com._604robotics.robotnik.action.field.Field;
 import com._604robotics.robotnik.action.field.FieldMap;
 import com._604robotics.robotnik.memory.IndexedTable;
-import com._604robotics.robotnik.utils.Logger;
+import com._604robotics.robotnik.utils.InternalLogger;
 import java.util.Enumeration;
 
 public class ActionData {
@@ -34,7 +34,7 @@ public class ActionData {
     }
     
     private double lookup (String name) {
-        if (!this.table.knowsAbout(name)) Logger.missing("Field", name);
+        if (!this.table.knowsAbout(name)) InternalLogger.missing("Field", name);
         return this.table.getNumber(name, 0D);
     }
 }

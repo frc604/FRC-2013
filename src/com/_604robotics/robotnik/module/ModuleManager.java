@@ -3,7 +3,7 @@ package com._604robotics.robotnik.module;
 import com._604robotics.robotnik.meta.Iterator;
 import com._604robotics.robotnik.meta.Repackager;
 import com._604robotics.robotnik.memory.IndexedTable;
-import com._604robotics.robotnik.utils.Logger;
+import com._604robotics.robotnik.utils.InternalLogger;
 import java.util.Hashtable;
 
 public class ModuleManager {
@@ -12,14 +12,14 @@ public class ModuleManager {
     public ModuleManager (ModuleMap moduleMap, final IndexedTable table) {
         Repackager.repackage(moduleMap.iterate(), new Repackager() {
             public Object wrap (Object key, Object value) {
-                return new ModuleReference((Module) value, table.getSubTable((String) key));
+                return new ModuleReference((String) key, (Module) value, table.getSubTable((String) key));
             }
         });
     }
     
     public ModuleReference getModule (String name) {
         ModuleReference ref = (ModuleReference) this.moduleTable.get(name);
-        if (ref == null) Logger.missing("ModuleReference", name);
+        if (ref == null) InternalLogger.missing("ModuleReference", name);
         return ref;
     }
     

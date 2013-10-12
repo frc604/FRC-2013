@@ -16,11 +16,11 @@ public class ModuleReference {
     
     private final ActionManager actionManager;
     
-    public ModuleReference (Module module, IndexedTable table) {
-        this.dataManager = new DataManager(module.getDataMap(), table.getSubTable("data"));
-        this.triggerManager = new TriggerManager(module.getTriggerMap(), table.getSubTable("triggers"));
+    public ModuleReference (String name, Module module, IndexedTable table) {
+        this.dataManager = new DataManager(name, module.getDataMap(), table.getSubTable("data"));
+        this.triggerManager = new TriggerManager(name, module.getTriggerMap(), table.getSubTable("triggers"));
         
-        this.actionManager = new ActionManager(this, module.getActionController(), table.getSubTable("actions"));
+        this.actionManager = new ActionManager(name, module.getActionController(), table.getSubTable("actions"));
         
         this.module = module;
     }

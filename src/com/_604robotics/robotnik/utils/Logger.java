@@ -21,10 +21,6 @@ public class Logger {
         trace(ex);
     }
     
-    public static void missing (String type, String name) {
-        warn("Missing " + type + " - " + name);
-    }
-    
     private static void record (PrintStream std, String message) {
         final String line = System.currentTimeMillis() + message;
         

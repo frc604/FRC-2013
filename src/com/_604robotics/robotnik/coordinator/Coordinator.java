@@ -29,25 +29,9 @@ public class Coordinator {
     
     public void update () {
         final Enumeration wires = this.dataWires.elements();
-        DataWire wire;
-        
-        while (wires.hasMoreElements()) {
-            wire = (DataWire) wires.nextElement();
-            
-            if (wire.isActive()) {
-                wire.getRecipient().sendData(wire.getFieldName(), wire.getData().get());
-            }
-        }
+        while (wires.hasMoreElements()) ConnectorProxy.pipe((DataWire) wires.nextElement());
         
         final Enumeration bindings = this.triggerBindings.elements();
-        Binding binding;
-        
-        while (bindings.hasMoreElements()) {
-            binding = (Binding) bindings.nextElement();
-            
-            if (binding.getTrigger().get()) {
-                binding.getRecipient().sendTrigger(binding.isSafety() ? 2D : 1D);
-            }
-        }
+        while (bindings.hasMoreElements()) ConnectorProxy.pipe((Binding) bindings.nextElement());
     }
 }
