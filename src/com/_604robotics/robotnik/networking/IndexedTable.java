@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.networktables2.util.Set;
 import edu.wpi.first.wpilibj.tables.ITable;
 import java.util.Hashtable;
 
+// TODO: Clean this up a bit.
 public class IndexedTable {
     private static final Hashtable cache = new Hashtable();
     
@@ -63,6 +64,11 @@ public class IndexedTable {
     
     public void putBoolean (String key, boolean value) {
         this.table.putBoolean(key, value);
+        this.addKey(key);
+    }
+    
+    public void putValue (String key, Object value) {
+        this.table.putValue(key, value);
         this.addKey(key);
     }
     
