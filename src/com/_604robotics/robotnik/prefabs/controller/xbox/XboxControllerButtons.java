@@ -20,18 +20,18 @@ public class XboxControllerButtons {
     public final ControllerAxisButton RT;
     
     public XboxControllerButtons (Joystick joystick) {
-        this.A = new ControllerButton(joystick, 1);
-        this.B = new ControllerButton(joystick, 2);
-        this.X = new ControllerButton(joystick, 3);
-        this.Y = new ControllerButton(joystick, 4);
-        this.LB = new ControllerButton(joystick, 5);
-        this.RB = new ControllerButton(joystick, 6);
+        this.A    = new ControllerButton(joystick, 1);
+        this.B    = new ControllerButton(joystick, 2);
+        this.X    = new ControllerButton(joystick, 3);
+        this.Y    = new ControllerButton(joystick, 4);
+        this.LB   = new ControllerButton(joystick, 5);
+        this.RB   = new ControllerButton(joystick, 6);
         this.Back = new ControllerButton(joystick, 7);
         
-        this.LeftStick = new ControllerButton(joystick, 9);
+        this.LeftStick  = new ControllerButton(joystick,  9);
         this.RightStick = new ControllerButton(joystick, 10);
         
-        this.LT = new ControllerAxisButton(joystick, 3, 1);
+        this.LT = new ControllerAxisButton(joystick, 3,  1);
         this.RT = new ControllerAxisButton(joystick, 3, -1);
     }
 }

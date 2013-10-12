@@ -13,7 +13,7 @@ public class XboxController {
         
         this.buttons = new XboxControllerButtons(joystick);
         
-        this.leftStick = new XboxControllerStick(joystick, 1, 2);
+        this.leftStick  = new XboxControllerStick(joystick, 1, 2);
         this.rightStick = new XboxControllerStick(joystick, 4, 5);
     }
 }
