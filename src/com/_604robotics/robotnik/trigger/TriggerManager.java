@@ -3,6 +3,7 @@ package com._604robotics.robotnik.trigger;
 import com._604robotics.robotnik.meta.Iterator;
 import com._604robotics.robotnik.meta.Repackager;
 import com._604robotics.robotnik.networking.IndexedTable;
+import com._604robotics.robotnik.utils.Logger;
 import java.util.Hashtable;
 
 public class TriggerManager {
@@ -18,12 +19,7 @@ public class TriggerManager {
     
     public TriggerReference getTrigger (String name) {
         TriggerReference ref = (TriggerReference) this.triggerTable.get(name);
-        
-        if (ref == null) {
-            System.err.println("WARNING: Missing TriggerReference - " + name);
-            new Error().printStackTrace();
-        }
-        
+        if (ref == null) Logger.missing("TriggerRefernece", name);
         return ref;
     }
     

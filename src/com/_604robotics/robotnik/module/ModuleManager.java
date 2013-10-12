@@ -3,7 +3,7 @@ package com._604robotics.robotnik.module;
 import com._604robotics.robotnik.meta.Iterator;
 import com._604robotics.robotnik.meta.Repackager;
 import com._604robotics.robotnik.networking.IndexedTable;
-import java.util.Enumeration;
+import com._604robotics.robotnik.utils.Logger;
 import java.util.Hashtable;
 
 public class ModuleManager {
@@ -19,12 +19,7 @@ public class ModuleManager {
     
     public ModuleReference getModule (String name) {
         ModuleReference ref = (ModuleReference) this.moduleTable.get(name);
-        
-        if (ref == null) {
-            System.err.println("WARNING: Missing ModuleReference - " + name);
-            new Error().printStackTrace();
-        }
-        
+        if (ref == null) Logger.missing("ModuleReference", name);
         return ref;
     }
     

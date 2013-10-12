@@ -5,6 +5,7 @@ import com._604robotics.robotnik.meta.Repackager;
 import com._604robotics.robotnik.meta.Scorekeeper;
 import com._604robotics.robotnik.module.ModuleReference;
 import com._604robotics.robotnik.networking.IndexedTable;
+import com._604robotics.robotnik.utils.Logger;
 import java.util.Hashtable;
 
 public class ActionManager {
@@ -33,12 +34,7 @@ public class ActionManager {
     
     public ActionReference getAction (String name) {
         ActionReference ref = (ActionReference) this.actionTable.get(name);
-        
-        if (ref == null) {
-            System.err.println("WARNING: Missing ActionReference - " + name);
-            new Error().printStackTrace();
-        }
-        
+        if (ref == null) Logger.missing("ActionReference", name);
         return ref;
     }
     

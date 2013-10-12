@@ -3,6 +3,7 @@ package com._604robotics.robotnik.action;
 import com._604robotics.robotnik.action.field.Field;
 import com._604robotics.robotnik.action.field.FieldMap;
 import com._604robotics.robotnik.networking.IndexedTable;
+import com._604robotics.robotnik.utils.Logger;
 import java.util.Enumeration;
 
 public class ActionData {
@@ -33,11 +34,7 @@ public class ActionData {
     }
     
     private double lookup (String name) {
-        if (!this.table.knowsAbout(name)) {
-            System.err.println("WARNING: Missing Field referenced - " + name);
-            new Error().printStackTrace();
-        }
-        
+        if (!this.table.knowsAbout(name)) Logger.missing("Field", name);
         return this.table.getNumber(name, 0D);
     }
 }

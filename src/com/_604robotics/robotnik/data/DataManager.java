@@ -2,6 +2,7 @@ package com._604robotics.robotnik.data;
 
 import com._604robotics.robotnik.meta.Repackager;
 import com._604robotics.robotnik.networking.IndexedTable;
+import com._604robotics.robotnik.utils.Logger;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -18,12 +19,7 @@ public class DataManager {
     
     public DataReference getData (String name) {
         final DataReference ref = (DataReference) this.dataTable.get(name);
-        
-        if (ref == null) {
-            System.err.println("WARNING: Missing DataRefernece - " + name);
-            new Error().printStackTrace();;
-        }
-        
+        if (ref == null) Logger.missing("DataReference", name);
         return ref;
     }
     
