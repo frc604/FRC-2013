@@ -18,8 +18,6 @@ public abstract class Module {
     private final Vector triggerBindings = new Vector();
     private final Vector dataWires = new Vector();
     
-    public void apply (ModuleReference module) {}
-    
     protected void set (DataMap dataMap) {
         this.dataMap = dataMap;
     }

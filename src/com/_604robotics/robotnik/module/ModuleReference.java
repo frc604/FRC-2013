@@ -26,7 +26,6 @@ public class ModuleReference {
         this.actionManager = new ActionManager(this, module.getActionController(), table.getSubTable("actions"));
         
         this.module = module;
-        module.apply(this);
     }
     
     public DataReference getData (String name) {
