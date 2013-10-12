@@ -56,7 +56,7 @@ public class ActionReference implements DataRecipient, TriggerRecipient {
         this.activeTrigger.set(false);
     }
     
-    public TriggerAccess getActiveTrigger () {
+    public TriggerAccess active () {
         return (TriggerAccess) this.activeTrigger;
     }
 }

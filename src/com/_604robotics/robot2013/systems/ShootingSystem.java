@@ -7,7 +7,7 @@ import com._604robotics.robotnik.module.ModuleManager;
 public class ShootingSystem extends Coordinator {
     public void apply (ModuleManager modules) {
         // Force the compressor off when shooting
-        this.bind(new Binding(modules.getModule("Regulator").getAction("Off"), modules.getModule("Shooter").getAction("On").getActiveTrigger(), true));
+        this.bind(new Binding(modules.getModule("Regulator").getAction("Off"), modules.getModule("Shooter").getAction("On").active(), true));
 
         // Force the shooter off until rotation is ready
         this.bind(new Binding(modules.getModule("Shooter").getAction("Off"), modules.getModule("Rotation").getTrigger("Ready").not(), true));
