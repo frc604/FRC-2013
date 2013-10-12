@@ -52,11 +52,11 @@ public abstract class Module {
         return this.actionController;
     }
     
-    protected Enumeration getBindings () {
+    protected Enumeration enumerateBindings () {
         return this.triggerBindings.elements();
     }
     
-    protected Enumeration getWires () {
+    protected Enumeration enumerateWires () {
         return this.dataWires.elements();
     }
 }

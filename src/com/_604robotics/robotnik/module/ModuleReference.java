@@ -47,7 +47,7 @@ public class ModuleReference {
         
         this.actionManager.reset();
         
-        final Enumeration wires = this.module.getWires();
+        final Enumeration wires = this.module.enumerateWires();
         DataWire wire;
         
         while (wires.hasMoreElements()) {
@@ -56,7 +56,7 @@ public class ModuleReference {
             wire.getRecipient().sendData(wire.getFieldName(), wire.getData().get());
         }
         
-        final Enumeration bindings = this.module.getBindings();
+        final Enumeration bindings = this.module.enumerateBindings();
         Binding binding;
         
         while (bindings.hasMoreElements()) {
