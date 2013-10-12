@@ -38,7 +38,6 @@ public class Robot extends SimpleRobot {
         System.out.println(" -- Autonomous mode begin.");
         
         this.loopTime.start();
-        this.moduleManager.begin();
         
         final Coordinator mode = this.modeMap.getAutonomousMode();
         while (this.isEnabled() && this.isAutonomous()) {
@@ -46,7 +45,6 @@ public class Robot extends SimpleRobot {
             this.loopTime.sample();
         }
         
-        this.moduleManager.end();
         this.loopTime.stop();
 
         System.out.println(" -- Autonomous mode end.");
@@ -56,7 +54,6 @@ public class Robot extends SimpleRobot {
         System.out.println(" -- Teleop mode begin.");
         
         this.loopTime.start();
-        this.moduleManager.begin();
         
         final Coordinator mode = this.modeMap.getTeleopMode();
         while (this.isEnabled() && this.isOperatorControl()) {
@@ -64,7 +61,6 @@ public class Robot extends SimpleRobot {
             this.loopTime.sample();
         }
         
-        this.moduleManager.end();
         this.loopTime.stop();
         
         System.out.println(" -- Teleop mode end.");

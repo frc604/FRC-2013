@@ -28,18 +28,8 @@ public class ModuleManager {
         while (i.next()) ((ModuleReference) i.value).update();
     }
     
-    public void begin () {
-        final Iterator i = new Iterator(this.moduleTable);
-        while (i.next()) ((ModuleReference) i.value).begin();
-    }
-    
     public void execute () {
         final Iterator i = new Iterator(this.moduleTable);
         while (i.next()) ((ModuleReference) i.value).execute();
-    }
-    
-    public void end () {
-        final Iterator i = new Iterator(this.moduleTable);
-        while (i.next()) ((ModuleReference) i.value).end();
     }
 }

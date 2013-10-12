@@ -37,15 +37,7 @@ public class TriggerReference implements TriggerAccess {
         return this.value.getBoolean(false);
     }
     
-    public void begin () {
-        this.trigger.begin();
-    }
-    
     public void update () {
         this.value.putBoolean(this.trigger.run());
-    }
-    
-    public void end () {
-        this.trigger.end();
     }
 }

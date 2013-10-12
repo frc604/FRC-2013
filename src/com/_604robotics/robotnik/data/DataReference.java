@@ -15,15 +15,7 @@ public class DataReference implements DataAccess {
         return this.value.getNumber(0D);
     }
     
-    public void begin () {
-        this.data.begin();
-    }
-    
     public void update () {
         this.value.putNumber(this.data.run());
-    }
-    
-    public void end () {
-        this.data.end();
     }
 }

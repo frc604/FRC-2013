@@ -23,18 +23,8 @@ public class TriggerManager {
         return ref;
     }
     
-    public void begin () {
-        final Iterator i = new Iterator(this.triggerTable);
-        while (i.next()) ((TriggerReference) i.value).begin();
-    }
-    
     public void update () {
         final Iterator i = new Iterator(this.triggerTable);
         while (i.next()) ((TriggerReference) i.value).update();
-    }
-    
-    public void end () {
-        final Iterator i = new Iterator(this.triggerTable);
-        while (i.next()) ((TriggerReference) i.value).end();
     }
 }

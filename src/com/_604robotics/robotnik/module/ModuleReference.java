@@ -68,19 +68,8 @@ public class ModuleReference {
         }
     }
     
-    public void begin () {
-        this.dataManager.begin();
-        this.triggerManager.begin();
-    }
-    
     public void execute () {
         this.actionManager.update();
         this.actionManager.execute();
-    }
-    
-    public void end () {
-        this.actionManager.end();
-        this.triggerManager.end();
-        this.dataManager.end();
     }
 }

@@ -24,18 +24,8 @@ public class DataManager {
         return ref;
     }
     
-    public void begin () {
-        final Iterator i = new Iterator(this.dataTable);
-        while (i.next()) ((DataReference) i.value).begin();
-    }
-    
     public void update () {
         final Iterator i = new Iterator(this.dataTable);
         while (i.next()) ((DataReference) i.value).update();
-    }
-    
-    public void end () {
-        final Iterator i = new Iterator(this.dataTable);
-        while (i.next()) ((DataReference) i.value).end();
     }
 }
