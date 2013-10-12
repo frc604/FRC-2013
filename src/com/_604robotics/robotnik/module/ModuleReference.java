@@ -2,14 +2,11 @@ package com._604robotics.robotnik.module;
 
 import com._604robotics.robotnik.action.ActionManager;
 import com._604robotics.robotnik.action.ActionReference;
-import com._604robotics.robotnik.coordinator.connectors.Binding;
-import com._604robotics.robotnik.coordinator.connectors.DataWire;
 import com._604robotics.robotnik.data.DataManager;
 import com._604robotics.robotnik.data.DataReference;
 import com._604robotics.robotnik.networking.IndexedTable;
 import com._604robotics.robotnik.trigger.TriggerManager;
 import com._604robotics.robotnik.trigger.TriggerReference;
-import java.util.Enumeration;
 
 public class ModuleReference {
     private final Module module;
@@ -45,26 +42,6 @@ public class ModuleReference {
         this.triggerManager.update();
         
         this.actionManager.reset();
-        
-        final Enumeration wires = this.module.enumerateWires();
-        DataWire wire;
-        
-        while (wires.hasMoreElements()) {
-            wire = (DataWire) wires.nextElement();
-            
-            wire.getRecipient().sendData(wire.getFieldName(), wire.getData().get());
-        }
-        
-        final Enumeration bindings = this.module.enumerateBindings();
-        Binding binding;
-        
-        while (bindings.hasMoreElements()) {
-            binding = (Binding) bindings.nextElement();
-            
-            if (binding.getTrigger().get()) {
-                binding.getRecipient().sendTrigger(binding.isSafety() ? 2D : 1D);
-            }
-        }
     }
     
     public void execute () {

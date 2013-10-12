@@ -44,7 +44,7 @@ public class ActionManager {
     }
     
     public void update () {
-        final Scorekeeper r = new Scorekeeper();
+        final Scorekeeper r = new Scorekeeper(0D);
         final Iterator i = controller.iterate();
         
         while (i.next()) r.consider(i.key, this.triggerTable.getNumber((String) i.key, 0D));

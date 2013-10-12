@@ -34,7 +34,9 @@ public class Coordinator {
         while (wires.hasMoreElements()) {
             wire = (DataWire) wires.nextElement();
             
-            wire.getRecipient().sendData(wire.getFieldName(), wire.getData().get());
+            if (wire.isActive()) {
+                wire.getRecipient().sendData(wire.getFieldName(), wire.getData().get());
+            }
         }
         
         final Enumeration bindings = this.triggerBindings.elements();

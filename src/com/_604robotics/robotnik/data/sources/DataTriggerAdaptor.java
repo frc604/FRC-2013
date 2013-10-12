@@ -3,10 +3,10 @@ package com._604robotics.robotnik.data.sources;
 import com._604robotics.robotnik.data.DataAccess;
 import com._604robotics.robotnik.trigger.TriggerAccess;
 
-public class DataTriggerAdapter implements DataAccess {
+public class DataTriggerAdaptor implements DataAccess {
     private final TriggerAccess trigger;
     
-    public DataTriggerAdapter (TriggerAccess trigger) {
+    public DataTriggerAdaptor (TriggerAccess trigger) {
         this.trigger = trigger;
     }
     

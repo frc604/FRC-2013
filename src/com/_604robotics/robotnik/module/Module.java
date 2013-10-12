@@ -2,11 +2,8 @@ package com._604robotics.robotnik.module;
 
 import com._604robotics.robotnik.action.ActionController;
 import com._604robotics.robotnik.action.controllers.DummyController;
-import com._604robotics.robotnik.coordinator.connectors.Binding;
-import com._604robotics.robotnik.coordinator.connectors.DataWire;
 import com._604robotics.robotnik.data.DataMap;
 import com._604robotics.robotnik.trigger.TriggerMap;
-import java.util.Enumeration;
 import java.util.Vector;
 
 public abstract class Module {
@@ -30,14 +27,6 @@ public abstract class Module {
         this.actionController = actionController;
     }
     
-    protected void bind (Binding binding) {
-        this.triggerBindings.addElement(binding);
-    }
-    
-    protected void fill (DataWire dataWire) {
-        this.dataWires.addElement(dataWire);
-    }
-    
     protected DataMap getDataMap () {
         return this.dataMap;
     }
@@ -48,13 +37,5 @@ public abstract class Module {
     
     protected ActionController getActionController () {
         return this.actionController;
-    }
-    
-    protected Enumeration enumerateBindings () {
-        return this.triggerBindings.elements();
-    }
-    
-    protected Enumeration enumerateWires () {
-        return this.dataWires.elements();
     }
 }

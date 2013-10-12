@@ -1,6 +1,5 @@
 package com._604robotics.robot2013.modes;
 
-import com._604robotics.robotnik.action.turnpike.Turnpike;
 import com._604robotics.robotnik.coordinator.Coordinator;
 import com._604robotics.robotnik.coordinator.connectors.Binding;
 import com._604robotics.robotnik.coordinator.connectors.DataWire;
@@ -82,19 +81,28 @@ public class TeleopMode extends Coordinator {
                     this.bind(new Binding(modules.getModule("Shooter").getAction("On"), manipController.buttons.LB));
                 }
                 
-                /* High, Mid, Low */
+                /* Angle Aiming */
                 {
-                    final Turnpike angles = new Turnpike();
+                    this.fill(new DataWire(modules.getModule("Rotation").getAction("Angle"), "angle",
+                            modules.getModule("Targets").getData("Top Angle"),
+                            manipController.buttons.Y));
+                    this.fill(new DataWire(modules.getModule("Rotation").getAction("Angle"), "angle",
+                            modules.getModule("Targets").getData("Middle Angle"),
+                            manipController.buttons.X));
+                    this.fill(new DataWire(modules.getModule("Rotation").getAction("Angle"), "angle",
+                            modules.getModule("Targets").getData("Bottom Angle"),
+                            manipController.buttons.A));
+                    this.fill(new DataWire(modules.getModule("Rotation").getAction("Angle"), "angle",
+                            modules.getModule("Targets").getData("Manual Aim Angle"),
+                            manipController.buttons.Back));
                     
-                    this.bind(new Binding(angles.generate(modules.getModule("Targets").getData("Top Angle")), manipController.buttons.Y));
-                    this.bind(new Binding(angles.generate(modules.getModule("Targets").getData("Middle Angle")), manipController.buttons.X));
-                    this.bind(new Binding(angles.generate(modules.getModule("Targets").getData("Bottom Angle")), manipController.buttons.A));
-                    this.bind(new Binding(angles.generate(modules.getModule("Dashboard").getData("Manual Aim Angle")), manipController.buttons.Back));
+                    final TriggerAccess aim = new TriggerOr(new TriggerAccess[] {
+                        manipController.buttons.Y, manipController.buttons.X,
+                        manipController.buttons.A, manipController.buttons.Back
+                    });
                     
-                    this.bind(new Binding(modules.getModule("Rotation").getAction("Angle"), angles.getTrigger()));
-                    this.fill(new DataWire(modules.getModule("Rotation").getAction("Angle"), "angle", angles));
-                    
-                    this.bind(new Binding(modules.getModule("Shooter").getAction("On"), angles.getTrigger()));
+                    this.bind(new Binding(modules.getModule("Rotation").getAction("Angle"), aim));
+                    this.bind(new Binding(modules.getModule("Shooter").getAction("On"), aim));
                 }
             }
         }
