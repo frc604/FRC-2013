@@ -1,6 +1,6 @@
 package com._604robotics.robotnik.data;
 
-import com._604robotics.robotnik.utils.InternalLogger;
+import com._604robotics.robotnik.logging.InternalLogger;
 
 public class DataProxy {
     private static boolean active = true;

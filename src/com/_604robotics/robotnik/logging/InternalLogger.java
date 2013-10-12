@@ -1,4 +1,4 @@
-package com._604robotics.robotnik.utils;
+package com._604robotics.robotnik.logging;
 
 public class InternalLogger {
     public static void missing (String type, String name) {

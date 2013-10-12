@@ -1,7 +1,7 @@
 package com._604robotics.robotnik.action;
 
-import com._604robotics.robotnik.utils.InternalLogger;
-import com._604robotics.robotnik.utils.Logger;
+import com._604robotics.robotnik.logging.InternalLogger;
+import com._604robotics.robotnik.logging.Logger;
 
 public class ActionProxy {
     private static boolean active = true;

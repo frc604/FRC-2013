@@ -1,5 +1,6 @@
 package com._604robotics.robotnik.utils;
 
+import com._604robotics.robotnik.logging.Logger;
 import com._604robotics.robotnik.action.ActionProxy;
 import com._604robotics.robotnik.coordinator.ConnectorProxy;
 import com._604robotics.robotnik.data.DataProxy;

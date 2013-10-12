@@ -1,5 +1,6 @@
 package com._604robotics.robotnik.utils;
 
+import com._604robotics.robotnik.logging.Logger;
 import edu.wpi.first.wpilibj.Timer;
 
 public class TimeSampler {

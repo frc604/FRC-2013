@@ -2,7 +2,7 @@ package com._604robotics.robotnik.coordinator;
 
 import com._604robotics.robotnik.coordinator.connectors.Binding;
 import com._604robotics.robotnik.coordinator.connectors.DataWire;
-import com._604robotics.robotnik.utils.Logger;
+import com._604robotics.robotnik.logging.Logger;
 
 public class ConnectorProxy {
     private static boolean active = true;

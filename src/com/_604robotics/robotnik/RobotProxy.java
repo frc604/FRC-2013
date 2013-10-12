@@ -3,7 +3,7 @@ package com._604robotics.robotnik;
 import com._604robotics.robotnik.coordinator.Coordinator;
 import com._604robotics.robotnik.coordinator.CoordinatorList;
 import com._604robotics.robotnik.module.ModuleManager;
-import com._604robotics.robotnik.utils.Logger;
+import com._604robotics.robotnik.logging.Logger;
 
 public class RobotProxy {
     private static boolean active = true;

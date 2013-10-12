@@ -1,4 +1,4 @@
-package com._604robotics.robotnik.utils;
+package com._604robotics.robotnik.logging;
 
 import com.sun.squawk.microedition.io.FileConnection;
 import java.io.IOException;

@@ -4,7 +4,7 @@ import com._604robotics.robotnik.meta.Iterator;
 import com._604robotics.robotnik.meta.Repackager;
 import com._604robotics.robotnik.meta.Scorekeeper;
 import com._604robotics.robotnik.memory.IndexedTable;
-import com._604robotics.robotnik.utils.InternalLogger;
+import com._604robotics.robotnik.logging.InternalLogger;
 import java.util.Hashtable;
 
 public class ActionManager {

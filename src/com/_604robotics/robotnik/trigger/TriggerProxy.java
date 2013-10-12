@@ -1,6 +1,6 @@
 package com._604robotics.robotnik.trigger;
 
-import com._604robotics.robotnik.utils.InternalLogger;
+import com._604robotics.robotnik.logging.InternalLogger;
 
 public class TriggerProxy {
     private static boolean active = true;
