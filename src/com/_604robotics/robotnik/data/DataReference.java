@@ -1,22 +1,18 @@
 package com._604robotics.robotnik.data;
 
-import com._604robotics.robotnik.networking.IndexedTable;
+import com._604robotics.robotnik.networking.IndexedTable.Slice;
 
 public class DataReference implements DataAccess {
     private final Data data;
+    private final Slice value;
     
-    private final IndexedTable table;
-    private final String name;
-    
-    public DataReference (Data data, IndexedTable table, String name) {
+    public DataReference (Data data, Slice value) {
         this.data = data;
-        
-        this.table = table;
-        this.name = name;
+        this.value = value;
     }
     
     public double get () {
-        return this.table.getNumber(this.name, 0D);
+        return this.value.getNumber(0D);
     }
     
     public void begin () {
@@ -24,7 +20,7 @@ public class DataReference implements DataAccess {
     }
     
     public void update () {
-        this.table.putNumber(this.name, this.data.run());
+        this.value.putNumber(this.data.run());
     }
     
     public void end () {

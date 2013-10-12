@@ -11,7 +11,7 @@ public class TriggerManager {
     public TriggerManager (TriggerMap triggerMap, final IndexedTable table) {
         this.triggerTable = Repackager.repackage(triggerMap.iterate(), new Repackager() {
            public Object wrap (Object key, Object value) {
-               return new TriggerReference((Trigger) value, table, (String) key);
+               return new TriggerReference((Trigger) value, table.getSlice((String) key));
            }
         });
     }
@@ -21,7 +21,7 @@ public class TriggerManager {
         
         if (ref == null) {
             System.err.println("WARNING: Missing TriggerReference - " + name);
-            new Error().printStackTrace();;
+            new Error().printStackTrace();
         }
         
         return ref;

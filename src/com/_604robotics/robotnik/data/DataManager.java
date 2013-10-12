@@ -11,7 +11,7 @@ public class DataManager {
     public DataManager (DataMap dataMap, final IndexedTable table) {
         this.dataTable = Repackager.repackage(dataMap.iterate(), new Repackager() {
            public Object wrap (Object key, Object value) {
-               return new DataReference((Data) value, table, (String) key);
+               return new DataReference((Data) value, table.getSlice((String) key));
            }
         });
     }

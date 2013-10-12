@@ -10,24 +10,25 @@ import java.util.Hashtable;
 public class ActionManager {
     private final ActionController controller;
     
-    private final Hashtable actionTable;
-    private final IndexedTable statusTable;
     private final IndexedTable triggerTable;
+    private final IndexedTable statusTable;
+    private final Hashtable actionTable;
     
     public ActionManager (final ModuleReference module, ActionController controller, final IndexedTable table) {
         this.controller = controller;
         
-        this.actionTable = Repackager.repackage(controller.iterate(), new Repackager() {
-           public Object wrap (Object key, Object value) {
-               return new ActionReference(module, (Action) value, table, (String) key);
-           }
-        });
+        this.triggerTable = table.getSubTable("triggers");
         
         this.statusTable = table.getSubTable("status");
         this.statusTable.putString("triggeredAction", "");
         this.statusTable.putString("lastAction", "");
         
-        this.triggerTable = table.getSubTable("triggers");
+        final IndexedTable dataTable = table.getSubTable("data");
+        this.actionTable = Repackager.repackage(controller.iterate(), new Repackager() {
+           public Object wrap (Object key, Object value) {
+               return new ActionReference(module, (Action) value, triggerTable.getSlice((String) key), dataTable.getSubTable((String) key));
+           }
+        });
     }
     
     public ActionReference getAction (String name) {
