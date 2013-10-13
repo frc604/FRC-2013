@@ -18,7 +18,7 @@ public class DashboardSystem extends Coordinator {
         this.fill(new DataWire(DashboardOutput.asBoolean(), "compressorCharged", modules.getModule("Regulator").getTrigger("Charged")));
         
         this.fill(new DataWire(DashboardOutput.asDouble(), "leftDriveTicks", modules.getModule("Drive").getData("Left Encoder"))); 
-        this.fill(new DataWire(DashboardOutput.asDouble(), "rightDriveTicks", modules.getModule("Drive").getData("Left Encoder"))); 
+        this.fill(new DataWire(DashboardOutput.asDouble(), "rightDriveTicks", modules.getModule("Drive").getData("Right Encoder"))); 
         
         this.fill(new DataWire(modules.getModule("Rotation").getAction("Angle"), "alignTime", modules.getModule("Dashboard").getData("Rotation Alignment Time")));
         
