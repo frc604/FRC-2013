@@ -17,7 +17,7 @@ public class Drive extends Module {
     private final RobotDrive drive = new RobotDrive(new Victor(1), new Victor(7));
     
     private final Encoder leftEncoder  = new Encoder(2, 3);
-    private final Encoder rightEncoder = new Encoder(4, 5);
+    private final Encoder rightEncoder = new Encoder(6, 7);
     
     public Drive () {
         drive.setInvertedMotor(MotorType.kFrontLeft, true);
