@@ -9,13 +9,14 @@ import com._604robotics.robotnik.data.DataMap;
 import com._604robotics.robotnik.module.Module;
 import com._604robotics.robotnik.trigger.Trigger;
 import com._604robotics.robotnik.trigger.TriggerMap;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 
 public class Shooter extends Module {
     private final Victor victor = new Victor(4);
-    private final Encoder encoder  = new Encoder(4, 5);
+    private final Encoder encoder  = new Encoder(4, 5, false, EncodingType.k1X);
     
     private boolean charged;
     
