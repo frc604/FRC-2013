@@ -92,9 +92,6 @@ public class TeleopMode extends Coordinator {
                     this.fill(new DataWire(modules.getModule("Rotation").getAction("Angle"), "angle",
                             modules.getModule("Targets").getData("Bottom Angle"),
                             manipController.buttons.A));
-                    this.fill(new DataWire(modules.getModule("Rotation").getAction("Angle"), "angle",
-                            modules.getModule("Targets").getData("Manual Aim Angle"),
-                            manipController.buttons.Back));
                     
                     final TriggerAccess aim = new TriggerOr(new TriggerAccess[] {
                         manipController.buttons.Y, manipController.buttons.X,
